@@ -10,60 +10,27 @@
             overflow: hidden; font-family: 'Consolas', monospace;
             display: flex; justify-content: center; align-items: center;
         }
-
-        /* Твой задний фон с картинкой */
         .background {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://i.redd.it/voy2k5a851791.jpg') no-repeat center center fixed;
-            background-size: cover;
-            filter: brightness(0.4);
-            z-index: -1;
+            background-size: cover; filter: brightness(0.4); z-index: -1;
         }
-
         .card {
-            background: rgba(10, 10, 15, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid #68217a;
-            border-radius: 20px;
-            padding: 50px 30px;
-            text-align: center;
-            width: 350px;
+            background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(12px);
+            border: 1px solid #68217a; border-radius: 20px;
+            padding: 50px 30px; text-align: center; width: 320px;
             box-shadow: 0 0 40px rgba(104, 33, 122, 0.6);
         }
-
-        h1 { color: #fff; margin: 0; font-size: 28px; text-shadow: 0 0 15px #68217a; }
+        h1 { color: #fff; margin: 0; font-size: 26px; text-shadow: 0 0 15px #68217a; }
         .tag { color: #569cd6; font-size: 14px; margin-bottom: 30px; display: block; }
-
         .btn {
-            display: block;
-            text-decoration: none;
-            color: #fff;
-            background: rgba(104, 33, 122, 0.2);
-            margin: 15px 0;
-            padding: 14px;
-            border-radius: 10px;
-            border: 1px solid #68217a;
-            transition: 0.4s;
-            font-weight: bold;
-            letter-spacing: 1px;
+            display: block; text-decoration: none; color: #fff;
+            background: rgba(104, 33, 122, 0.2); margin: 15px 0;
+            padding: 14px; border-radius: 10px; border: 1px solid #68217a;
+            transition: 0.4s; font-weight: bold;
         }
-
-        .btn:hover {
-            background: #68217a;
-            box-shadow: 0 0 25px #aa00ff;
-            transform: translateY(-3px);
-        }
-
-        /* Особая кнопка для бота */
-        .btn-bot {
-            border-color: #00ff88;
-            color: #00ff88;
-            background: rgba(0, 255, 136, 0.05);
-            animation: pulse 2s infinite;
-        }
-
+        .btn:hover { background: #68217a; box-shadow: 0 0 25px #aa00ff; transform: translateY(-3px); }
+        .btn-bot { border-color: #00ff88; color: #00ff88; animation: pulse 2s infinite; }
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4); }
             70% { box-shadow: 0 0 0 15px rgba(0, 255, 136, 0); }
@@ -74,14 +41,12 @@
 <body>
     <div class="background"></div>
     <div class="card">
-    <h1>@NuIIReference</h1>
-    <span class="tag">System.OSINT_Analyst.exe</span>
-    
-    <a href="https://t.me/NuIIReference" target="_blank" class="btn">CONTACT DEV</a>
-    
-    <a href="https://github.com/fikepolme" target="_blank" class="btn">GITHUB</a>
-    
-    <a href="https://t.me/nullreferencerobot?start=ml" target="_blank" class="btn btn-bot">LAUNCH OSINT BOT</a>
-</div>
-</body>
+        <h1>@NuIIReference</h1>
+        <span class="tag">System.OSINT_Analyst.exe</span>
+        
+        <a href="https://t.me/NuIIReference" target="_blank" class="btn">CONTACT DEV</a>
+        <a href="https://github.com/fikepolme" target="_blank" class="btn">GITHUB</a>
+        <a href="https://t.me/nullreferencerobot" target="_blank" class="btn btn-bot">LAUNCH OSINT BOT</a>
+    </div>
+    </body>
 </html>
