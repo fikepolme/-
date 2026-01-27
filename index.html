@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@NuIIReference | OSINT</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: 'Consolas', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Твой задний фон */
+        .background {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('https://i.redd.it/voy2k5a851791.jpg') no-repeat center center fixed;
+            background-size: cover;
+            filter: brightness(0.5); /* Немного затемнил, чтобы текст читался */
+            z-index: -1;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid #68217a;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            width: 320px;
+            box-shadow: 0 0 30px rgba(104, 33, 122, 0.6);
+        }
+
+        h1 { color: #fff; margin: 0; font-size: 24px; text-shadow: 0 0 10px #68217a; }
+        .tag { color: #569cd6; font-size: 13px; margin-bottom: 25px; display: block; }
+
+        .btn {
+            display: block;
+            text-decoration: none;
+            color: #fff;
+            background: rgba(104, 33, 122, 0.2);
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #68217a;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #68217a;
+            box-shadow: 0 0 20px #aa00ff;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="card">
+        <h1>@NuIIReference</h1>
+        <span class="tag">System.OSINT_Developer;</span>
+        
+        <a href="https://t.me/NuIIReference" class="btn">TELEGRAM</a>
+        <a href="https://github.com/fikepolme" class="btn">GITHUB</a>
+        <a href="#" class="btn" style="border-color: #00ff88; color: #00ff88;">OSINT BOT (Soon)</a>
+    </div>
+</body>
+</html>
