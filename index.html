@@ -3,82 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@NuIIReference | Resume & Portfolio</title>
+    <title>@NuIIReference | Portfolio</title>
     <style>
+        * { box-sizing: border-box; }
         body, html {
             margin: 0; padding: 0; min-height: 100vh; width: 100%;
-            font-family: 'Consolas', monospace; background: #050505; color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a; color: #fff;
             display: flex; justify-content: center; align-items: flex-start;
-            padding-top: 50px; padding-bottom: 50px;
+            padding: 20px;
         }
         .background {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://i.redd.it/voy2k5a851791.jpg') no-repeat center center fixed;
-            background-size: cover; filter: brightness(0.2); z-index: -1;
+            background: linear-gradient(45deg, #050505 0%, #1a0a1f 100%);
+            z-index: -1;
         }
-        .container { width: 90%; max-width: 500px; }
+        /* Декоративное свечение на фоне вместо ломаной картинки */
+        .glow {
+            position: fixed; width: 300px; height: 300px;
+            background: #68217a; filter: blur(150px);
+            opacity: 0.3; border-radius: 50%; top: 20%; left: 30%; z-index: -1;
+        }
         .card {
-            background: rgba(10, 10, 15, 0.9); backdrop-filter: blur(15px);
+            background: rgba(15, 15, 20, 0.95);
             border: 1px solid #68217a; border-radius: 20px;
-            padding: 35px; text-align: center;
-            box-shadow: 0 0 50px rgba(104, 33, 122, 0.4);
+            padding: 30px; width: 100%; max-width: 450px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            text-align: center;
         }
-        h1 { margin: 0; font-size: 26px; text-shadow: 0 0 10px #68217a; }
-        .tag { color: #569cd6; font-size: 14px; margin-bottom: 25px; display: block; }
+        h1 { margin: 0; font-size: 24px; letter-spacing: 1px; }
+        .tag { color: #569cd6; font-size: 13px; margin: 10px 0 25px; display: block; }
         .btn {
             display: block; text-decoration: none; color: #fff;
-            background: rgba(104, 33, 122, 0.2); margin: 10px 0;
-            padding: 14px; border-radius: 10px; border: 1px solid #68217a;
+            background: #68217a; margin: 10px 0;
+            padding: 14px; border-radius: 10px;
             transition: 0.3s; font-weight: bold; font-size: 14px;
         }
-        .btn:hover { background: #68217a; transform: translateY(-2px); }
-        .btn-bot { border-color: #00ff88; color: #00ff88; }
+        .btn:hover { background: #8a2be2; transform: translateY(-2px); }
+        .btn-bot { background: transparent; border: 1px solid #00ff88; color: #00ff88; }
+        .btn-bot:hover { background: rgba(0, 255, 136, 0.1); }
         
-        /* Стили Резюме */
-        .resume-content { text-align: left; margin-top: 30px; border-top: 1px dashed #68217a; padding-top: 25px; }
-        .section-title { color: #00ff88; font-size: 16px; font-weight: bold; text-transform: uppercase; margin: 20px 0 10px 0; display: block; }
-        .exp-item { margin-bottom: 15px; }
-        .exp-item b { color: #569cd6; }
-        .bullet { color: #68217a; margin-right: 5px; }
-        ul { list-style: none; padding: 0; margin: 0; font-size: 13px; line-height: 1.6; color: #ccc; }
-        li { margin-bottom: 5px; }
+        .resume { text-align: left; margin-top: 30px; border-top: 1px solid #333; padding-top: 20px; }
+        .label { color: #00ff88; font-size: 12px; font-weight: bold; text-transform: uppercase; display: block; margin-top: 15px; }
+        ul { padding-left: 18px; margin: 8px 0; font-size: 13px; color: #ccc; line-height: 1.6; }
+        p { font-size: 13px; color: #ccc; margin: 5px 0; }
     </style>
 </head>
 <body>
     <div class="background"></div>
-    <div class="container">
-        <div class="card">
-            <h1>@NuIIReference</h1>
-            <span class="tag">Technical Marketer / Funnel Architect</span>
-            
-            <a href="tg://resolve?domain=NuIIReference" class="btn">ОТКЛИКНУТЬСЯ / СВЯЗЬ</a>
-            <a href="tg://resolve?domain=nullreferencerobot" class="btn btn-bot">ЗАПУСТИТЬ МОЕГО БОТА</a>
+    <div class="glow"></div>
+    <div class="card">
+        <h1>@NuIIReference</h1>
+        <span class="tag">Technical Marketer / Funnel Architect</span>
+        
+        <a href="tg://resolve?domain=NuIIReference" class="btn">СВЯЗАТЬСЯ СО МНОЙ</a>
+        <a href="tg://resolve?domain=nullreferencerobot" class="btn btn-bot">ЗАПУСТИТЬ OSINT БОТА</a>
 
-            <div class="resume-content">
-                <span class="section-title">🎯 Опыт и компетенции</span>
-                <ul>
-                    <li><span class="bullet">▶</span>Работа с холодным трафиком и окупаемостью.</li>
-                    <li><span class="bullet">▶</span>Проектирование логики чат-ботов (Python).</li>
-                    <li><span class="bullet">▶</span>Создание лендингов с высокой конверсией.</li>
-                    <li><span class="bullet">▶</span>Сбор аналитики (CTR, CPC, ROMI).</li>
-                </ul>
+        <div class="resume">
+            <span class="label">🎯 Компетенции</span>
+            <ul>
+                <li>Автоворонки и работа с холодным трафиком.</li>
+                <li>Разработка чат-ботов на Python (Telebot).</li>
+                <li>Создание лендингов и аналитика (ROMI/CTR).</li>
+            </ul>
 
-                <span class="section-title">💼 Кейсы</span>
-                <div class="exp-item">
-                    <b>OSINT Ecosystem:</b>
-                    <ul>
-                        <li>Разработал связку "Сайт + Бот" для автоматизации поиска данных.</li>
-                        <li>Полностью настроил техническую часть и логику взаимодействия.</li>
-                    </ul>
-                </div>
+            <span class="label">💼 Проекты</span>
+            <p><b>OSINT Ecosystem:</b> Связка "Web + Bot" для автоматизации обработки данных. Полная техническая реализация.</p>
 
-                <span class="section-title">⚙️ Стек технологий</span>
-                <p style="font-size: 12px; color: #00ff88;">Python | Telebot | HTML/CSS | Git | ADS Control | Analytics</p>
-                
-                <span class="section-title">🎓 Образование</span>
-                <p style="font-size: 13px; color: #ccc;">Technical Marketing & Software Development (2023-2026)</p>
-            </div>
+            <span class="label">🛠 Стек</span>
+            <p>Python, HTML/CSS, Git, Ads Analytics.</p>
         </div>
     </div>
+</body>
+</html>
 </body>
 </html>
