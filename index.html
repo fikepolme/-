@@ -56,4 +56,86 @@
         }
         .btn:hover { background: #fff; color: #000; transform: scale(1.03); }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(3
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 30px; width: 100%; max-width: 1400px; margin-top: 60px; }
+        
+        .card { border: 1px solid var(--border); padding: 50px; text-align: left; background: rgba(255,255,255,0.015); cursor: pointer; }
+        .card:hover { border-color: var(--p); background: #fff; }
+        .card:hover h3, .card:hover p { color: #000; }
+        
+        .card h3 { font-size: 2rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 15px; text-transform: uppercase; }
+        .card p { opacity: 0.35; line-height: 1.5; font-size: 0.9rem; }
+
+        .q-text { font-size: clamp(2rem, 6vw, 4rem); font-weight: 800; letter-spacing: -3px; margin-bottom: 60px; text-transform: uppercase; line-height: 1; }
+
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo" onclick="app.go('home')">@NuII<span>Ref</span></div>
+    <div class="links">
+        <span onclick="app.go('work')">Archives</span>
+        <span onclick="app.go('test')">Lab</span>
+    </div>
+</nav>
+
+<section id="home" class="active">
+    <h1>Logic<br>Driven<br><span style="color: var(--p);">Dev.</span></h1>
+    <button class="btn" onclick="app.go('work')">Open Archive</button>
+</section>
+
+<section id="work">
+    <h1>Selected</h1>
+    <div class="grid">
+        <div class="card" onclick="app.go('test')">
+            <h3>Engine.v1</h3>
+            <p>Логическое ядро на чистом ванильном JS. Алгоритмы оценки данных без использования сторонних фреймворков.</p>
+        </div>
+        <div class="card">
+            <h3>Visuals.v1</h3>
+            <p>Бруталистическая дизайн-система. Акцент на типографику, микро-взаимодействия и производительность рендеринга.</p>
+        </div>
+    </div>
+</section>
+
+<section id="test">
+    <div style="max-width: 900px;">
+        <h2 id="q-txt" class="q-text">...</h2>
+        <button class="btn" onclick="app.step(1)">Confirm</button>
+        <button class="btn" style="border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.2);" onclick="app.step(0)">Ignore</button>
+    </div>
+</section>
+
+<section id="result">
+    <h1 id="res-t" style="color: var(--p);">Verified</h1>
+    <p id="res-d" style="font-size: 1.1rem; opacity: 0.4; margin-top: 20px; text-transform: uppercase; letter-spacing: 2px;">System Profile: Core Architect</p>
+    <button class="btn" style="margin-top: 50px;" onclick="app.go('home')">Restart</button>
+</section>
+
+<script>
+    const app = {
+        idx: 0,
+        qs: ["Использовать чистую архитектуру?", "Оставить только важные детали?", "Запустить финальный процесс?"],
+        go(id) {
+            console.log('Jump to:', id);
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            const target = document.getElementById(id);
+            if(target) target.classList.add('active');
+            if(id === 'test') { this.idx = 0; this.up(); }
+            window.scrollTo(0,0);
+        },
+        up() { document.getElementById('q-txt').innerText = this.qs[this.idx]; },
+        step(v) {
+            this.idx++;
+            if(this.idx < this.qs.length) this.up();
+            else this.go('result');
+        }
+    };
+    window.onload = () => app.go('home');
+</script>
+</body>
+</html>
