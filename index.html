@@ -3,139 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@NuIIReference | Deep Archive</title>
+    <title>@NuIIReference | Senior Frontend Case</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --p: #00f2fe; 
-            --bg: #050505; 
-            --border: rgba(255, 255, 255, 0.08);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1); }
+        :root { --p: #00f2fe; --bg: #050505; --border: rgba(255, 255, 255, 0.1); }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1); }
+        body { background: var(--bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
         
-        body { 
-            background: var(--bg); 
-            color: #fff; 
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
-            background-image: radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.04) 0%, transparent 70%);
-        }
-
-        /* Премиальное зерно (Noise) */
+        /* Глубокий фон с зерном */
         body::after {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.08"/></svg>');
-            opacity: 0.12; pointer-events: none; z-index: 10000;
+            opacity: 0.1; pointer-events: none; z-index: 10000;
         }
 
-        nav { 
-            position: fixed; top: 0; width: 100%; padding: 40px 8%; 
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000;
-        }
-
-        .logo { font-size: 1.6rem; font-weight: 800; letter-spacing: -2px; cursor: pointer; text-transform: uppercase; pointer-events: auto; }
+        nav { position: fixed; top: 0; width: 100%; padding: 30px 8%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(5,5,5,0.8); backdrop-filter: blur(10px); }
+        .logo { font-size: 1.4rem; font-weight: 800; cursor: pointer; text-transform: uppercase; }
         .logo span { color: var(--p); }
-
-        .links span { margin-left: 40px; font-size: 0.7rem; font-weight: 800; letter-spacing: 3px; cursor: pointer; opacity: 0.4; text-transform: uppercase; pointer-events: auto; }
+        .links span { margin-left: 30px; font-size: 0.7rem; font-weight: 800; letter-spacing: 2px; cursor: pointer; opacity: 0.5; }
         .links span:hover { opacity: 1; color: var(--p); }
 
-        section { display: none; min-height: 100vh; padding: 0 8%; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-        section.active { display: flex; animation: reveal 0.7s ease; }
+        section { display: none; min-height: 100vh; padding: 140px 8% 60px; flex-direction: column; align-items: flex-start; text-align: left; }
+        section.active { display: flex; animation: reveal 0.6s ease; }
 
-        h1 { 
-            font-size: clamp(3.5rem, 16vw, 11rem); font-weight: 800; line-height: 0.8; letter-spacing: -8px; margin-bottom: 50px; 
-            text-transform: uppercase;
-        }
+        h1 { font-size: clamp(3rem, 10vw, 8rem); font-weight: 800; letter-spacing: -6px; line-height: 0.85; margin-bottom: 40px; text-transform: uppercase; }
+        h2 { font-size: 2.5rem; letter-spacing: -2px; margin-bottom: 30px; color: var(--p); }
 
-        .btn { 
-            padding: 25px 60px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; 
-            letter-spacing: 5px; border: 1px solid #fff; background: transparent; color: #fff; 
-            cursor: pointer; position: relative; z-index: 100; pointer-events: auto;
-        }
-        .btn:hover { background: #fff; color: #000; transform: scale(1.03); }
+        /* Resume Grid */
+        .res-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 50px; width: 100%; max-width: 1200px; }
+        .res-col h4 { text-transform: uppercase; font-size: 0.8rem; letter-spacing: 3px; color: rgba(255,255,255,0.3); margin-bottom: 20px; }
+        .skill-tag { display: inline-block; padding: 6px 14px; border: 1px solid var(--border); margin: 0 8px 10px 0; font-size: 0.8rem; font-weight: 700; border-radius: 4px; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 30px; width: 100%; max-width: 1400px; margin-top: 60px; }
-        
-        .card { border: 1px solid var(--border); padding: 50px; text-align: left; background: rgba(255,255,255,0.015); cursor: pointer; }
-        .card:hover { border-color: var(--p); background: #fff; }
-        .card:hover h3, .card:hover p { color: #000; }
-        
-        .card h3 { font-size: 2rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 15px; text-transform: uppercase; }
-        .card p { opacity: 0.35; line-height: 1.5; font-size: 0.9rem; }
+        /* Portfolio Cards */
+        .port-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; width: 100%; }
+        .p-card { border: 1px solid var(--border); padding: 40px; background: rgba(255,255,255,0.02); position: relative; overflow: hidden; }
+        .p-card:hover { border-color: var(--p); background: #fff; color: #000; }
+        .p-card h3 { font-size: 1.8rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: -1px; }
+        .p-card p { opacity: 0.5; font-size: 0.95rem; margin-bottom: 20px; }
 
-        .q-text { font-size: clamp(2rem, 6vw, 4rem); font-weight: 800; letter-spacing: -3px; margin-bottom: 60px; text-transform: uppercase; line-height: 1; }
+        .btn { padding: 20px 45px; border: 1px solid #fff; background: transparent; color: #fff; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; cursor: pointer; font-size: 0.8rem; }
+        .btn:hover { background: #fff; color: #000; }
 
-        @keyframes reveal {
-            from { opacity: 0; transform: translateY(30px); filter: blur(10px); }
-            to { opacity: 1; transform: translateY(0); filter: blur(0); }
-        }
+        @keyframes reveal { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="logo" onclick="app.go('home')">@NuII<span>Ref</span></div>
+    <div class="logo" onclick="app.go('home')">NuII<span>Ref</span></div>
     <div class="links">
-        <span onclick="app.go('work')">Archives</span>
-        <span onclick="app.go('test')">Lab</span>
+        <span onclick="app.go('work')">Portfolio</span>
+        <span onclick="app.go('resume')">Resume</span>
+        <span onclick="app.go('test')">Engine</span>
     </div>
 </nav>
 
 <section id="home" class="active">
-    <h1>Logic<br>Driven<br><span style="color: var(--p);">Dev.</span></h1>
-    <button class="btn" onclick="app.go('work')">Open Archive</button>
+    <h1 style="color: var(--p);">Core<br>Developer.</h1>
+    <p style="font-size: 1.5rem; max-width: 600px; opacity: 0.6; margin-bottom: 40px;">Проектирую и создаю отказоустойчивые веб-системы с упором на производительность и архитектуру.</p>
+    <button class="btn" onclick="app.go('work')">Explore Work</button>
 </section>
 
 <section id="work">
-    <h1>Selected</h1>
-    <div class="grid">
-        <div class="card" onclick="app.go('test')">
-            <h3>Engine.v1</h3>
-            <p>Логическое ядро на чистом ванильном JS. Алгоритмы оценки данных без использования сторонних фреймворков.</p>
+    <h2>Selected Projects</h2>
+    <div class="port-grid">
+        <div class="p-card">
+            <h3>Psychology Engine</h3>
+            <p>SPA-приложение на чистом JavaScript. Разработка алгоритма весов для анализа психологических тестов без серверной задержки.</p>
+            <div class="skill-tag">Vanilla JS</div><div class="skill-tag">Data Logic</div>
         </div>
-        <div class="card">
-            <h3>Visuals.v1</h3>
-            <p>Бруталистическая дизайн-система. Акцент на типографику, микро-взаимодействия и производительность рендеринга.</p>
+        <div class="p-card">
+            <h3>Industrial UI Kit</h3>
+            <p>Библиотека компонентов в стиле брутализма. Оптимизация рендеринга и кастомная событийная модель для сложных интерфейсов.</p>
+            <div class="skill-tag">CSS3 Architecture</div><div class="skill-tag">UX Flow</div>
         </div>
     </div>
 </section>
 
-<section id="test">
-    <div style="max-width: 900px;">
-        <h2 id="q-txt" class="q-text">...</h2>
-        <button class="btn" onclick="app.step(1)">Confirm</button>
-        <button class="btn" style="border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.2);" onclick="app.step(0)">Ignore</button>
-    </div>
-</section>
-
-<section id="result">
-    <h1 id="res-t" style="color: var(--p);">Verified</h1>
-    <p id="res-d" style="font-size: 1.1rem; opacity: 0.4; margin-top: 20px; text-transform: uppercase; letter-spacing: 2px;">System Profile: Core Architect</p>
-    <button class="btn" style="margin-top: 50px;" onclick="app.go('home')">Restart</button>
-</section>
-
-<script>
-    const app = {
-        idx: 0,
-        qs: ["Использовать чистую архитектуру?", "Оставить только важные детали?", "Запустить финальный процесс?"],
-        go(id) {
-            console.log('Jump to:', id);
-            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-            const target = document.getElementById(id);
-            if(target) target.classList.add('active');
-            if(id === 'test') { this.idx = 0; this.up(); }
-            window.scrollTo(0,0);
-        },
-        up() { document.getElementById('q-txt').innerText = this.qs[this.idx]; },
-        step(v) {
-            this.idx++;
-            if(this.idx < this.qs.length) this.up();
-            else this.go('result');
-        }
-    };
-    window.onload = () => app.go('home');
-</script>
-</body>
-</html>
+<section id="resume">
+    <h2>Technical Resume</h2>
+    <div class="res-grid">
+        <div class="res-col">
+            <h4>Stack</h4>
+            <div class="skill-tag">JavaScript ES6+</div>
+            <div class="skill-tag">Node.js Basics</div>
+            <div class="skill-tag">Git / GitHub</div>
+            <div class="skill-tag">SPA Architecture</div>
+            <div class="skill-tag">UI/UX Engineering</div>
+        </div>
+        <div class="res-col">
+            <h4>Experience</h4>
+            <div style="margin-bottom: 30px;">
+                <p style="font-weight: 800; font-size: 1.2rem;">Frontend Engineer / Independent</p>
+                <p style="opacity: 0.5; margin: 5px 0 15px;">2024 — Present</p>
+                <p
