@@ -92,4 +92,73 @@
         <div class="card">
             <h3>Industrial UI</h3>
             <p style="opacity:0.6; margin-bottom:15px;">Дизайн-система в стиле брутализма. Оптимизация CSS.</p>
-            <span class="tag">UI
+            <span class="tag">UI</span><span class="tag">UX</span>
+        </div>
+    </div>
+</section>
+
+<section id="resume">
+    <h2 style="font-size: 3rem; margin-bottom: 20px;">RESUME</h2>
+    <div style="max-width: 600px;">
+        <p style="font-size: 1.2rem; line-height: 1.6; opacity: 0.8;">
+            @NuIIReference. Frontend-разработчик с фокусом на архитектуру. <br><br>
+            <strong>Стек:</strong> JavaScript (ES6+), HTML5/CSS3 (Industrial Design), Git, SPA Architecture.
+        </p>
+        <button class="btn" style="margin-top:40px;" onclick="window.location.href='https://t.me/NuIIReference'">Contact Me</button>
+    </div>
+</section>
+
+<section id="test">
+    <h1 id="q-txt" style="font-size: 3rem;">...</h1>
+    <div style="margin-top: 40px;">
+        <button class="btn" onclick="app.step(1)">YES</button>
+        <button class="btn" style="background:none; color:#fff; border:1px solid #fff; margin-left: 20px;" onclick="app.step(0)">NO</button>
+    </div>
+</section>
+
+<section id="result">
+    <h1 style="color:var(--p)">VERIFIED</h1>
+    <p style="margin-bottom: 30px;">Core Profile: System Architect</p>
+    <button class="btn" onclick="app.go('home')">Restart</button>
+</section>
+
+<script>
+    // Объект приложения с явными методами
+    const app = {
+        idx: 0,
+        qs: ["Используем чистый JS?", "Архитектура важнее дизайна?", "Готовы к запуску?"],
+        
+        go: function(id) {
+            console.log("Navigating to:", id);
+            // Прячем всё
+            document.querySelectorAll('section').forEach(s => {
+                s.classList.remove('active');
+            });
+            // Показываем нужное
+            const target = document.getElementById(id);
+            if(target) {
+                target.classList.add('active');
+            }
+            if(id === 'test') { this.idx = 0; this.up(); }
+            window.scrollTo(0,0);
+        },
+
+        up: function() {
+            document.getElementById('q-txt').innerText = this.qs[this.idx];
+        },
+
+        step: function(v) {
+            this.idx++;
+            if(this.idx < this.qs.length) this.up();
+            else this.go('result');
+        }
+    };
+
+    // Принудительная проверка при загрузке
+    window.onload = () => {
+        console.log("System Ready");
+        app.go('home');
+    };
+</script>
+</body>
+</html>
