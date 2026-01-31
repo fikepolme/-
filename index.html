@@ -3,167 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@NuIIReference | Elite Tech Portfolio</title>
+    <title>@NuIIReference | Industry Standard</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --accent: #00f2fe; 
-            --dark: #02040a; 
-            --card-bg: rgba(255, 255, 255, 0.02);
-            --border: rgba(255, 255, 255, 0.07);
+            --p: #00f2fe; 
+            --bg: #02040a; 
+            --border: rgba(255, 255, 255, 0.08);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1); }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1); }
         
         body { 
-            background-color: var(--dark); 
+            background: var(--bg); 
             color: #fff; 
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+            background-image: radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.03) 0%, transparent 50%);
         }
 
-        /* Текстура шума (дорогой эффект) */
-        body::before {
-            content: "";
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-            opacity: 0.15; pointer-events: none; z-index: 9999;
-        }
-
-        /* Глубокий градиент */
-        .glow {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
-                        radial-gradient(circle at 85% 85%, rgba(129, 140, 248, 0.08) 0%, transparent 40%);
-            z-index: -1; pointer-events: none;
+        /* Тот самый "дорогой" шум */
+        body::after {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.40"/></svg>');
+            opacity: 0.2; pointer-events: none; z-index: 10000;
         }
 
         nav { 
-            position: fixed; top: 0; width: 100%; padding: 30px 10%; 
+            position: fixed; top: 0; width: 100%; padding: 35px 8%; 
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; border-bottom: 1px solid var(--border);
-            background: rgba(2, 4, 10, 0.8); backdrop-filter: blur(15px);
+            z-index: 1000; mix-blend-mode: difference;
         }
 
-        .logo { font-size: 1.6rem; font-weight: 800; letter-spacing: -2px; cursor: pointer; }
-        .logo span { color: var(--accent); }
+        .logo { font-size: 1.8rem; font-weight: 800; letter-spacing: -2px; cursor: pointer; text-transform: uppercase; }
+        .links span { margin-left: 40px; font-size: 0.7rem; font-weight: 800; letter-spacing: 3px; cursor: pointer; opacity: 0.5; text-transform: uppercase; }
+        .links span:hover { opacity: 1; color: var(--p); }
 
-        .links span { 
-            margin-left: 40px; font-size: 0.75rem; font-weight: 800; 
-            text-transform: uppercase; letter-spacing: 2px; cursor: pointer; opacity: 0.4;
-        }
-        .links span:hover { opacity: 1; color: var(--accent); }
-
-        section { 
-            display: none; min-height: 100vh; padding: 180px 10% 100px;
-            flex-direction: column; align-items: center; justify-content: center; text-align: center;
-        }
-        section.active { display: flex; animation: reveal 1s ease; }
+        section { display: none; min-height: 100vh; padding: 0 8%; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        section.active { display: flex; animation: reveal 0.8s ease; }
 
         h1 { 
-            font-size: clamp(3.5rem, 15vw, 9rem); font-weight: 800; 
-            line-height: 0.8; letter-spacing: -7px; margin-bottom: 40px;
-            text-shadow: 0 10px 50px rgba(0,0,0,0.5);
+            font-size: clamp(4rem, 18vw, 12rem); font-weight: 800; line-height: 0.8; letter-spacing: -10px; margin-bottom: 40px; 
+            text-transform: uppercase;
         }
 
         .btn { 
-            padding: 25px 60px; font-weight: 800; font-size: 1rem; 
-            text-transform: uppercase; letter-spacing: 2px; border: none; border-radius: 4px;
-            cursor: pointer; background: #fff; color: #000; position: relative;
+            padding: 28px 70px; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; 
+            letter-spacing: 4px; border: 1px solid #fff; background: transparent; color: #fff; 
+            cursor: pointer; position: relative; overflow: hidden;
         }
-        .btn:hover { background: var(--accent); transform: scale(1.05); box-shadow: 0 20px 60px rgba(0, 242, 254, 0.3); }
+        .btn:hover { background: #fff; color: #000; transform: scale(1.02); }
+        .btn:active { transform: scale(0.98); }
 
-        .grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
-            gap: 30px; width: 100%; max-width: 1300px; margin-top: 60px;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; width: 100%; max-width: 1400px; margin-top: 80px; }
+        .card { border: 1px solid var(--border); padding: 60px; text-align: left; background: rgba(255,255,255,0.01); }
+        .card:hover { border-color: var(--p); background: #fff; }
+        .card:hover h3, .card:hover p { color: #000; }
+        .card h3 { font-size: 2.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 20px; text-transform: uppercase; }
+        .card p { opacity: 0.4; line-height: 1.4; }
 
-        .card { 
-            background: var(--card-bg); border: 1px solid var(--border); 
-            padding: 50px; border-radius: 4px; text-align: left;
-            position: relative; overflow: hidden;
-        }
-        .card:hover { border-color: var(--accent); background: rgba(255,255,255,0.04); }
-        .card h3 { font-size: 2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 20px; }
+        .q-text { font-size: clamp(2rem, 6vw, 4rem); font-weight: 800; letter-spacing: -3px; margin-bottom: 60px; text-transform: uppercase; }
 
         @keyframes reveal {
-            from { opacity: 0; transform: translateY(50px) skewY(2deg); }
-            to { opacity: 1; transform: translateY(0) skewY(0deg); }
+            from { opacity: 0; transform: scale(1.1); filter: blur(20px); }
+            to { opacity: 1; transform: scale(1); filter: blur(0); }
         }
     </style>
 </head>
 <body>
 
-<div class="glow"></div>
-
 <nav>
-    <div class="logo" onclick="go('home')">Null<span>Reference</span></div>
+    <div class="logo" onclick="app.go('home')">@NuII<span>Reference</span></div>
     <div class="links">
-        <span onclick="go('work')">Archives</span>
-        <span onclick="go('test')">Engine</span>
+        <span onclick="app.go('work')">WORK</span>
+        <span onclick="app.go('test')">LAB</span>
     </div>
 </nav>
 
 <section id="home" class="active">
-    <h1 style="color: #fff;">Build.<br>Solve.<br><span style="color: var(--accent);">Reference.</span></h1>
-    <p style="font-size: 1.2rem; color: #555; max-width: 500px; margin-bottom: 50px; font-weight: 600;">System Architect & Logic Engineer</p>
-    <button class="btn" onclick="go('work')">Explore Work</button>
+    <h1>Logic<br>Over<br><span style="color: var(--p);">Design.</span></h1>
+    <button class="btn" onclick="app.go('work')">Initiate Experience</button>
 </section>
 
 <section id="work">
-    <h1 style="font-size: 5rem; margin-bottom: 10px;">Selected</h1>
+    <h1>Archives</h1>
     <div class="grid">
-        <div class="card">
-            <h3>Psychology Engine</h3>
-            <p style="opacity: 0.4;">Алгоритмическое типирование. Реализовано на Vanilla JS.</p>
+        <div class="card" onclick="app.go('test')">
+            <h3>Core Engine</h3>
+            <p>Система принятия решений на базе Vanilla JavaScript. Отсутствие внешних зависимостей. Максимальная производительность.</p>
         </div>
         <div class="card">
-            <h3>Elite UI System</h3>
-            <p style="opacity: 0.4;">Брутальная дизайн-система для высоконагруженных интерфейсов.</p>
+            <h3>Visual Code</h3>
+            <p>Бруталистический интерфейс с фокусом на типографику и пользовательский опыт в режиме High-Performance.</p>
         </div>
     </div>
 </section>
 
 <section id="test">
-    <div style="max-width: 800px;">
-        <h2 id="q-text" style="font-size: 3rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 50px;">...</h2>
-        <button class="btn" onclick="step(3)">Confirm</button>
-        <button class="btn" style="background: transparent; color: #fff; border: 1px solid #fff; margin-left: 20px;" onclick="step(-3)">Decline</button>
+    <div style="max-width: 1000px;">
+        <h2 id="q-txt" class="q-text">...</h2>
+        <button class="btn" onclick="app.step(1)">YES</button>
+        <button class="btn" style="border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.3);" onclick="app.step(0)">NO</button>
     </div>
 </section>
 
 <section id="result">
-    <h1 id="res-title" style="color: var(--accent);"></h1>
-    <button class="btn" style="margin-top: 40px;" onclick="go('home')">Reset System</button>
+    <h1 id="res-t" style="color: var(--p);"></h1>
+    <p id="res-d" style="font-size: 1.2rem; opacity: 0.5; margin-bottom: 40px;"></p>
+    <button class="btn" onclick="app.go('home')">System Reset</button>
 </section>
 
 <script>
     const app = {
-        cur: 0,
-        pts: 0,
-        qs: ["Вы стремитесь к абсолютному контролю?", "Важен ли код больше чем визуализация?", "Вы решаете задачи, которые другие боятся?"]
-    };
-
-    function go(id) {
-        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        if(id === 'test') { app.cur = 0; app.pts = 0; up(); }
-        window.scrollTo(0,0);
-    }
-
-    function up() { document.getElementById('q-text').innerText = app.qs[app.cur]; }
-
-    function step(v) {
-        app.pts += v; app.cur++;
-        if (app.cur < app.qs.length) up();
-        else {
-            go('result');
-            document.getElementById('res-title').innerText = app.pts > 0 ? "Architect" : "Strategist";
+        idx: 0,
+        qs: ["Вы готовы к деструктивному дизайну?", "Логика важнее визуальных эффектов?", "Этот код станет вашим лучшим решением?"],
+        go(id) {
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            if(id === 'test') { this.idx = 0; this.up(); }
+            window.scrollTo(0,0);
+        },
+        up() { document.getElementById('q-txt').innerText = this.qs[this.idx]; },
+        step(v) {
+            this.idx++;
+            if(this.idx < this.qs.length) this.up();
+            else {
+                this.go('result');
+                document.getElementById('res-t').innerText = "Verified";
+                document.getElementById('res-d').innerText = "Профиль @NuIIReference подтвержден.";
+            }
         }
-    }
-
-    window.onload = () => go('home');
+    };
+    window.onload = () => app.go('home');
 </script>
+</body>
+</html>
 </body>
 </html>
