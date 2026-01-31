@@ -3,78 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@NuIIReference | Portfolio</title>
+    <title>NuIIReference | Digital Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #00f2fe; --purple: #818cf8; --bg: #030712;
+            --card: rgba(255, 255, 255, 0.03); --border: rgba(255, 255, 255, 0.1);
+        }
         * { box-sizing: border-box; }
-        body, html {
-            margin: 0; padding: 0; min-height: 100vh; width: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0a0a0a; color: #fff;
-            display: flex; justify-content: center; align-items: flex-start;
-            padding: 20px;
+        body { 
+            margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); color: white; overflow-x: hidden;
         }
-        .background {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(45deg, #050505 0%, #1a0a1f 100%);
-            z-index: -1;
+
+        /* Навигация */
+        nav { 
+            padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; 
+            background: rgba(3,7,18,0.8); backdrop-filter: blur(15px); 
+            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border);
         }
-        /* Декоративное свечение на фоне вместо ломаной картинки */
-        .glow {
-            position: fixed; width: 300px; height: 300px;
-            background: #68217a; filter: blur(150px);
-            opacity: 0.3; border-radius: 50%; top: 20%; left: 30%; z-index: -1;
-        }
-        .card {
-            background: rgba(15, 15, 20, 0.95);
-            border: 1px solid #68217a; border-radius: 20px;
-            padding: 30px; width: 100%; max-width: 450px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
-            text-align: center;
-        }
-        h1 { margin: 0; font-size: 24px; letter-spacing: 1px; }
-        .tag { color: #569cd6; font-size: 13px; margin: 10px 0 25px; display: block; }
-        .btn {
-            display: block; text-decoration: none; color: #fff;
-            background: #68217a; margin: 10px 0;
-            padding: 14px; border-radius: 10px;
-            transition: 0.3s; font-weight: bold; font-size: 14px;
-        }
-        .btn:hover { background: #8a2be2; transform: translateY(-2px); }
-        .btn-bot { background: transparent; border: 1px solid #00ff88; color: #00ff88; }
-        .btn-bot:hover { background: rgba(0, 255, 136, 0.1); }
+        .logo { font-weight: 800; font-size: 1.5rem; cursor: pointer; letter-spacing: -1px; }
+        .logo span { color: var(--primary); }
+        .nav-links span { margin-left: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 600; opacity: 0.6; transition: 0.3s; }
+        .nav-links span:hover { opacity: 1; color: var(--primary); }
+
+        /* Секции */
+        section { display: none; padding: 60px 5%; min-height: 90vh; animation: pageIn 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        section.active { display: flex; flex-direction: column; align-items: center; }
+
+        .container { max-width: 1100px; width: 100%; text-align: center; }
+        h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800; margin-bottom: 20px; letter-spacing: -2px; }
         
-        .resume { text-align: left; margin-top: 30px; border-top: 1px solid #333; padding-top: 20px; }
-        .label { color: #00ff88; font-size: 12px; font-weight: bold; text-transform: uppercase; display: block; margin-top: 15px; }
-        ul { padding-left: 18px; margin: 8px 0; font-size: 13px; color: #ccc; line-height: 1.6; }
-        p { font-size: 13px; color: #ccc; margin: 5px 0; }
+        /* Кнопки */
+        .btn { 
+            background: white; color: black; padding: 18px 45px; border-radius: 50px; 
+            font-weight: 800; border: none; cursor: pointer; transition: 0.3s; font-size: 1rem;
+        }
+        .btn:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 242, 254, 0.3); background: var(--primary); }
+
+        /* Кейсы */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 50px; width: 100%; }
+        .case-card { 
+            background: var(--card); border: 1px solid var(--border); padding: 30px; border-radius: 28px; 
+            text-align: left; transition: 0.4s; position: relative; overflow: hidden;
+        }
+        .case-card:hover { border-color: var(--primary); background: rgba(255,255,255,0.05); transform: translateY(-10px); }
+        .case-tag { font-size: 0.7rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: block; }
+        
+        /* Тест */
+        .quiz-card { background: var(--card); border: 1px solid var(--border); padding: 50px 30px; border-radius: 40px; width: 100%; max-width: 700px; }
+        .progress-bar { width: 100%; height: 6px; background: #111827; border-radius: 10px; margin-bottom: 40px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--purple)); width: 0%; transition: 0.4s; }
+        .scale { display: flex; justify-content: space-between; align-items: center; margin-top: 50px; }
+        .dot { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #334155; cursor: pointer; transition: 0.3s; }
+        .dot:hover { border-color: var(--primary); transform: scale(1.2); }
+
+        @keyframes pageIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-    <div class="background"></div>
-    <div class="glow"></div>
-    <div class="card">
-        <h1>@NuIIReference</h1>
-        <span class="tag">Technical Marketer / Funnel Architect</span>
-        
-        <a href="tg://resolve?domain=NuIIReference" class="btn">СВЯЗАТЬСЯ СО МНОЙ</a>
-        <a href="tg://resolve?domain=nullreferencerobot" class="btn btn-bot">ЗАПУСТИТЬ OSINT БОТА</a>
 
-        <div class="resume">
-            <span class="label">🎯 Компетенции</span>
-            <ul>
-                <li>Автоворонки и работа с холодным трафиком.</li>
-                <li>Разработка чат-ботов на Python (Telebot).</li>
-                <li>Создание лендингов и аналитика (ROMI/CTR).</li>
-            </ul>
+<nav>
+    <div class="logo" onclick="show('home')">NuII<span>Reference</span></div>
+    <div class="nav-links">
+        <span onclick="show('home')">ГЛАВНАЯ</span>
+        <span onclick="show('cases')">КЕЙСЫ</span>
+        <span onclick="show('test')">ТЕСТ</span>
+    </div>
+</nav>
 
-            <span class="label">💼 Проекты</span>
-            <p><b>OSINT Ecosystem:</b> Связка "Web + Bot" для автоматизации обработки данных. Полная техническая реализация.</p>
-
-            <span class="label">🛠 Стек</span>
-            <p>Python, HTML/CSS, Git, Ads Analytics.</p>
+<section id="home" class="active">
+    <div class="container">
+        <h1 style="background: linear-gradient(to right, #fff, #666); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Код. Дизайн. Личность.</h1>
+        <p style="color: #94a3b8; font-size: 1.3rem; max-width: 600px; margin: 0 auto 40px;">Добро пожаловать в мой цифровой хаб. Здесь я создаю интерактивные решения и помогаю людям узнать себя.</p>
+        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+            <button class="btn" onclick="show('test')">УЗНАТЬ СВОЙ ТИП</button>
+            <button class="btn" style="background: transparent; color: white; border: 1px solid var(--border);" onclick="show('cases')">СМОТРЕТЬ КЕЙСЫ</button>
         </div>
     </div>
-</body>
-</html>
+</section>
+
+<section id="cases">
+    <div class="container">
+        <span class="case-tag">Портфолио</span>
+        <h1>Мои Работы</h1>
+        <div class="grid">
+            <div class="case-card">
+                <span class="case-tag">Web App</span>
+                <h3>WorldID Engine</h3>
+                <p>Алгоритм психологического тестирования с мгновенным результатом. Реализован на Vanilla JS без лишних библиотек.</p>
+                <div style="margin-top: 20px; font-size: 0.8rem; opacity: 0.5;">JS • CSS Grid • UI/UX</div>
+            </div>
+            <div class="case-card">
+                <span class="case-tag">Design Concept</span>
+                <h3>Glassmorphism UI</h3>
+                <p>Исследование матовых интерфейсов и плавных анимаций для современных веб-приложений.</p>
+                <div style="margin-top: 20px; font-size: 0.8rem; opacity: 0.5;">Figma • CSS Variables</div>
+            </div>
+            <div class="case-card">
+                <span class="case-tag">Interactive</span>
+                <h3>Portfolio Hub</h3>
+                <p>Единая экосистема для демонстрации проектов и взаимодействия с пользователем.</p>
+                <div style="margin-top: 20px; font-size: 0.8rem; opacity: 0.5;">Deployment • Vercel • Git</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="test">
+    <div class="container">
+        <div class="progress-bar"><div id="bar" class="progress-fill"></div></div>
+        <div class="quiz-card">
+            <h2 id="q-text" style="min-height: 100px; font-size: 2rem;">...</h2>
+            <div class="scale">
+                <span style="color: #10b981; font-weight: 800;">ДА</span>
+                <div class="dot" style="width: 65px; height: 65px; border-color: #10b981;" onclick="nx(3)"></div>
+                <div class="dot" style="width: 45px; height: 45px; border-color: #10b981;" onclick="nx(1)"></div>
+                <div class="dot" style="width: 25px; height: 25px;" onclick="nx(0)"></div>
+                <div class="dot" style="width: 45px; height: 45px; border-color: #f43f5e;" onclick="nx(-1)"></div>
+                <div class="dot" style="width: 65px; height: 65px; border-color: #f43f5e;" onclick="nx(-3)"></div>
+                <span style="color: #f43f5e; font-weight: 800;">НЕТ</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="result">
+    <div class="container">
+        <div class="quiz-card">
+            <div id="res-badge" style="background: var(--primary); color: black; padding: 5px 15px; border-radius: 8px; display: inline-block; font-weight: 800; font-size: 0.8rem; margin-bottom: 20px;">РЕЗУЛЬТАТ</div>
+            <h1 id="res-title" style="color: var(--primary);"></h1>
+            <p id="res-desc" style="font-size: 1.2rem; opacity: 0.7; max-width: 500px; margin: 0 auto 30px;"></p>
+            <button class="btn" onclick="location.href='https://t.me/NuIIReference'">СВЯЗАТЬСЯ С АВТОРОМ</button>
+        </div>
+    </div>
+</section>
+
+<script>
+    const qs = [
+        "Вам нравится знакомиться с новыми людьми.",
+        "Вы предпочитаете планировать дела заранее.",
+        "Вы всегда доводите начатые проекты до конца.",
+        "Вам важнее логика, чем чувства окружающих.",
+        "Вы часто погружаетесь в свои мысли.",
+        "Вы считаете, что дисциплина важнее таланта.",
+        "Вам легко понять эмоции других людей.",
+        "Вы любите порядок во всем, что вас окружает.",
+        "Вы часто импровизируете в сложных ситуациях.",
+        "Вам комфортно находиться в центре внимания."
+    ];
+
+    let c = 0, s = 0;
+
+    function show(id) {
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        if(id === 'test') { c = 0; s = 0; update(); }
+        window.scrollTo(0,0);
+    }
+
+    function update() {
+        document.getElementById('q-text').innerText = qs[c];
+        document.getElementById('bar').style.width = (c / qs.length) * 100 + '%';
+    }
+
+    function nx(v) {
+        s += v; c++;
+        if(c < qs.length) update();
+        else finish();
+    }
+
+    function finish() {
+        show('result');
+        const t = document.getElementById('res-title');
+        const d = document.getElementById('res-desc');
+        
+        if(s > 10) {
+            t.innerText = "Борец (ENFP)";
+            d.innerText = "Вы — креативная и общительная личность. Ваша энергия заразительна, а идеи способны менять мир вокруг.";
+        } else if (s > 0) {
+            t.innerText = "Стратег (INTJ)";
+            d.innerText = "Вы — глубокий мыслитель и аналитик. Вы видите структуру там, где другие видят хаос.";
+        } else {
+            t.innerText = "Хранитель (ISTJ)";
+            d.innerText = "Вы — надежный и ответственный человек. На вашей дисциплине и честности держится любой проект.";
+        }
+    }
+</script>
+
 </body>
 </html>
