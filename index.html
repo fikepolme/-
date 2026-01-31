@@ -3,147 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@NuIIReference | Fix</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>@NuIIReference | Elite Tech Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { --p: #00f2fe; --bg: #030712; --border: rgba(255, 255, 255, 0.1); }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: var(--bg); color: #fff; overflow-x: hidden;
+        :root { 
+            --accent: #00f2fe; 
+            --dark: #02040a; 
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --border: rgba(255, 255, 255, 0.07);
         }
 
-        /* Фикс фона: pointer-events: none обязателен */
-        .bg-glow {
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1); }
+        
+        body { 
+            background-color: var(--dark); 
+            color: #fff; 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Текстура шума (дорогой эффект) */
+        body::before {
+            content: "";
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 10% 10%, rgba(0, 242, 254, 0.05), transparent 50%),
-                        radial-gradient(circle at 90% 90%, rgba(129, 140, 248, 0.05), transparent 50%);
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.15; pointer-events: none; z-index: 9999;
+        }
+
+        /* Глубокий градиент */
+        .glow {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+                        radial-gradient(circle at 85% 85%, rgba(129, 140, 248, 0.08) 0%, transparent 40%);
             z-index: -1; pointer-events: none;
         }
 
         nav { 
-            position: fixed; top: 0; width: 100%; padding: 20px 8%; 
+            position: fixed; top: 0; width: 100%; padding: 30px 10%; 
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(3, 7, 18, 0.8); backdrop-filter: blur(20px); z-index: 10000;
-            border-bottom: 1px solid var(--border);
+            z-index: 1000; border-bottom: 1px solid var(--border);
+            background: rgba(2, 4, 10, 0.8); backdrop-filter: blur(15px);
         }
 
-        .logo { font-size: 1.4rem; font-weight: 800; cursor: pointer; pointer-events: all; }
-        .logo span { color: var(--p); }
+        .logo { font-size: 1.6rem; font-weight: 800; letter-spacing: -2px; cursor: pointer; }
+        .logo span { color: var(--accent); }
 
         .links span { 
-            margin-left: 25px; font-weight: 700; font-size: 0.8rem; cursor: pointer; 
-            opacity: 0.6; pointer-events: all; text-transform: uppercase;
+            margin-left: 40px; font-size: 0.75rem; font-weight: 800; 
+            text-transform: uppercase; letter-spacing: 2px; cursor: pointer; opacity: 0.4;
         }
+        .links span:hover { opacity: 1; color: var(--accent); }
 
         section { 
-            display: none; padding: 160px 8% 60px; min-height: 100vh; 
-            flex-direction: column; align-items: center; text-align: center; 
+            display: none; min-height: 100vh; padding: 180px 10% 100px;
+            flex-direction: column; align-items: center; justify-content: center; text-align: center;
         }
-        section.active { display: flex; }
+        section.active { display: flex; animation: reveal 1s ease; }
 
-        h1 { font-size: clamp(2.5rem, 10vw, 6rem); font-weight: 800; letter-spacing: -4px; margin-bottom: 30px; }
+        h1 { 
+            font-size: clamp(3.5rem, 15vw, 9rem); font-weight: 800; 
+            line-height: 0.8; letter-spacing: -7px; margin-bottom: 40px;
+            text-shadow: 0 10px 50px rgba(0,0,0,0.5);
+        }
 
-        /* Кнопки с принудительным кликом */
         .btn { 
-            padding: 20px 40px; border-radius: 100px; border: none; font-weight: 800; 
-            cursor: pointer !important; background: #fff; color: #000; 
-            display: inline-block; position: relative; z-index: 100;
-            pointer-events: all !important;
+            padding: 25px 60px; font-weight: 800; font-size: 1rem; 
+            text-transform: uppercase; letter-spacing: 2px; border: none; border-radius: 4px;
+            cursor: pointer; background: #fff; color: #000; position: relative;
         }
-        .btn:active { transform: scale(0.95); }
+        .btn:hover { background: var(--accent); transform: scale(1.05); box-shadow: 0 20px 60px rgba(0, 242, 254, 0.3); }
+
+        .grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
+            gap: 30px; width: 100%; max-width: 1300px; margin-top: 60px;
+        }
 
         .card { 
-            background: rgba(255,255,255,0.03); border: 1px solid var(--border); 
-            padding: 40px; border-radius: 35px; text-align: left; width: 100%; max-width: 500px;
+            background: var(--card-bg); border: 1px solid var(--border); 
+            padding: 50px; border-radius: 4px; text-align: left;
+            position: relative; overflow: hidden;
         }
+        .card:hover { border-color: var(--accent); background: rgba(255,255,255,0.04); }
+        .card h3 { font-size: 2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 20px; }
 
-        .dot { 
-            width: 70px; height: 70px; border-radius: 50%; display: inline-flex; 
-            align-items: center; justify-content: center; font-weight: 800; 
-            cursor: pointer; background: #fff; color: #000; margin: 10px;
-            pointer-events: all !important;
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(50px) skewY(2deg); }
+            to { opacity: 1; transform: translateY(0) skewY(0deg); }
         }
     </style>
 </head>
 <body>
 
-<div class="bg-glow"></div>
+<div class="glow"></div>
 
 <nav>
-    <div class="logo" onclick="go('home')">NuII<span>Reference</span></div>
+    <div class="logo" onclick="go('home')">Null<span>Reference</span></div>
     <div class="links">
-        <span onclick="go('work')">Кейсы</span>
-        <span onclick="go('test')">Лаб</span>
+        <span onclick="go('work')">Archives</span>
+        <span onclick="go('test')">Engine</span>
     </div>
 </nav>
 
 <section id="home" class="active">
-    <h1>Design<br>Beyond.</h1>
-    <button class="btn" onclick="go('work')">СМОТРЕТЬ РАБОТЫ</button>
+    <h1 style="color: #fff;">Build.<br>Solve.<br><span style="color: var(--accent);">Reference.</span></h1>
+    <p style="font-size: 1.2rem; color: #555; max-width: 500px; margin-bottom: 50px; font-weight: 600;">System Architect & Logic Engineer</p>
+    <button class="btn" onclick="go('work')">Explore Work</button>
 </section>
 
 <section id="work">
-    <h1>Cases</h1>
-    <div class="card">
-        <h3>Psychology Engine</h3>
-        <p style="opacity: 0.5; margin-top: 10px;">SPA на чистом JavaScript. Логика состояний без библиотек.</p>
+    <h1 style="font-size: 5rem; margin-bottom: 10px;">Selected</h1>
+    <div class="grid">
+        <div class="card">
+            <h3>Psychology Engine</h3>
+            <p style="opacity: 0.4;">Алгоритмическое типирование. Реализовано на Vanilla JS.</p>
+        </div>
+        <div class="card">
+            <h3>Elite UI System</h3>
+            <p style="opacity: 0.4;">Брутальная дизайн-система для высоконагруженных интерфейсов.</p>
+        </div>
     </div>
-    <button class="btn" style="margin-top:30px" onclick="go('test')">ЗАПУСТИТЬ ТЕСТ</button>
 </section>
 
 <section id="test">
-    <div class="card" style="text-align: center;">
-        <h2 id="q-text" style="min-height: 80px; margin-bottom: 20px;">...</h2>
-        <div class="dot" onclick="step(3)">ДА</div>
-        <div class="dot" style="background:transparent; color:#fff; border:1px solid #fff" onclick="step(-3)">НЕТ</div>
+    <div style="max-width: 800px;">
+        <h2 id="q-text" style="font-size: 3rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 50px;">...</h2>
+        <button class="btn" onclick="step(3)">Confirm</button>
+        <button class="btn" style="background: transparent; color: #fff; border: 1px solid #fff; margin-left: 20px;" onclick="step(-3)">Decline</button>
     </div>
 </section>
 
 <section id="result">
-    <div class="card" style="text-align: center;">
-        <h1 id="res-title" style="color: var(--p)"></h1>
-        <p id="res-desc" style="margin: 20px 0"></p>
-        <button class="btn" onclick="go('home')">В НАЧАЛО</button>
-    </div>
+    <h1 id="res-title" style="color: var(--accent);"></h1>
+    <button class="btn" style="margin-top: 40px;" onclick="go('home')">Reset System</button>
 </section>
 
 <script>
-    const state = {
+    const app = {
         cur: 0,
         pts: 0,
-        qs: ["Любите чистый код?", "Важен ли дизайн?", "Планируете задачи?", "Работаете быстро?", "Готовы к новому?"]
+        qs: ["Вы стремитесь к абсолютному контролю?", "Важен ли код больше чем визуализация?", "Вы решаете задачи, которые другие боятся?"]
     };
 
     function go(id) {
-        console.log("Navigating to:", id);
-        document.querySelectorAll('section').forEach(s => s.style.display = 'none');
-        const target = document.getElementById(id);
-        if (target) {
-            target.style.display = 'flex';
-        }
-        if(id === 'test') { state.cur = 0; state.pts = 0; up(); }
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        if(id === 'test') { app.cur = 0; app.pts = 0; up(); }
         window.scrollTo(0,0);
     }
 
-    function up() {
-        document.getElementById('q-text').innerText = state.qs[state.cur];
-    }
+    function up() { document.getElementById('q-text').innerText = app.qs[app.cur]; }
 
     function step(v) {
-        state.pts += v; state.cur++;
-        if (state.cur < state.qs.length) up();
-        else finish();
+        app.pts += v; app.cur++;
+        if (app.cur < app.qs.length) up();
+        else {
+            go('result');
+            document.getElementById('res-title').innerText = app.pts > 0 ? "Architect" : "Strategist";
+        }
     }
 
-    function finish() {
-        go('result');
-        document.getElementById('res-title').innerText = state.pts > 0 ? "Architect" : "Minimalist";
-        document.getElementById('res-desc').innerText = "Кейс подготовлен @NuIIReference.";
-    }
-
-    // Инициализация
     window.onload = () => go('home');
 </script>
 </body>
