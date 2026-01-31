@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NuIIReference | Digital Portfolio</title>
+    <title>NuIIReference | Creative Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #00f2fe; --purple: #818cf8; --bg: #030712;
-            --card: rgba(255, 255, 255, 0.03); --border: rgba(255, 255, 255, 0.1);
+            --card: rgba(255, 255, 255, 0.03); --border: rgba(255, 255, 255, 0.08);
         }
         * { box-sizing: border-box; }
         body { 
@@ -22,17 +22,17 @@
             background: rgba(3,7,18,0.8); backdrop-filter: blur(15px); 
             position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border);
         }
-        .logo { font-weight: 800; font-size: 1.5rem; cursor: pointer; letter-spacing: -1px; }
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
         .logo span { color: var(--primary); }
         .nav-links span { margin-left: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 600; opacity: 0.6; transition: 0.3s; }
         .nav-links span:hover { opacity: 1; color: var(--primary); }
 
         /* Секции */
-        section { display: none; padding: 60px 5%; min-height: 90vh; animation: pageIn 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        section { display: none; padding: 60px 5%; min-height: 90vh; animation: pageIn 0.5s ease; }
         section.active { display: flex; flex-direction: column; align-items: center; }
 
         .container { max-width: 1100px; width: 100%; text-align: center; }
-        h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800; margin-bottom: 20px; letter-spacing: -2px; }
+        h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 800; margin-bottom: 20px; letter-spacing: -2px; }
         
         /* Кнопки */
         .btn { 
@@ -44,11 +44,11 @@
         /* Кейсы */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 50px; width: 100%; }
         .case-card { 
-            background: var(--card); border: 1px solid var(--border); padding: 30px; border-radius: 28px; 
-            text-align: left; transition: 0.4s; position: relative; overflow: hidden;
+            background: var(--card); border: 1px solid var(--border); padding: 35px; border-radius: 30px; 
+            text-align: left; transition: 0.4s; position: relative;
         }
         .case-card:hover { border-color: var(--primary); background: rgba(255,255,255,0.05); transform: translateY(-10px); }
-        .case-tag { font-size: 0.7rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: block; }
+        .case-tag { font-size: 0.7rem; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 15px; display: block; }
         
         /* Тест */
         .quiz-card { background: var(--card); border: 1px solid var(--border); padding: 50px 30px; border-radius: 40px; width: 100%; max-width: 700px; }
@@ -58,7 +58,7 @@
         .dot { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #334155; cursor: pointer; transition: 0.3s; }
         .dot:hover { border-color: var(--primary); transform: scale(1.2); }
 
-        @keyframes pageIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pageIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -74,37 +74,37 @@
 
 <section id="home" class="active">
     <div class="container">
-        <h1 style="background: linear-gradient(to right, #fff, #666); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Код. Дизайн. Личность.</h1>
-        <p style="color: #94a3b8; font-size: 1.3rem; max-width: 600px; margin: 0 auto 40px;">Добро пожаловать в мой цифровой хаб. Здесь я создаю интерактивные решения и помогаю людям узнать себя.</p>
+        <h1>Творю код,<span> создаю смыслы.</span></h1>
+        <p style="color: #94a3b8; font-size: 1.3rem; max-width: 650px; margin: 0 auto 40px;">Я — @NuIIReference. Разрабатываю интерактивные интерфейсы и сложные алгоритмы типирования. Здесь мои лучшие кейсы и тот самый тест личности.</p>
         <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-            <button class="btn" onclick="show('test')">УЗНАТЬ СВОЙ ТИП</button>
-            <button class="btn" style="background: transparent; color: white; border: 1px solid var(--border);" onclick="show('cases')">СМОТРЕТЬ КЕЙСЫ</button>
+            <button class="btn" onclick="show('cases')">СМОТРЕТЬ МОИ КЕЙСЫ</button>
+            <button class="btn" style="background: transparent; color: white; border: 1px solid var(--border);" onclick="show('test')">ПРОЙТИ ТЕСТ</button>
         </div>
     </div>
 </section>
 
 <section id="cases">
     <div class="container">
-        <span class="case-tag">Портфолио</span>
-        <h1>Мои Работы</h1>
+        <span class="case-tag">Портфолио разработчика</span>
+        <h1>Мои успешные кейсы</h1>
         <div class="grid">
             <div class="case-card">
-                <span class="case-tag">Web App</span>
-                <h3>WorldID Engine</h3>
-                <p>Алгоритм психологического тестирования с мгновенным результатом. Реализован на Vanilla JS без лишних библиотек.</p>
-                <div style="margin-top: 20px; font-size: 0.8rem; opacity: 0.5;">JS • CSS Grid • UI/UX</div>
+                <span class="case-tag">Logic & Algorithm</span>
+                <h3>Personality Engine v2.0</h3>
+                <p>Разработка математической модели для определения психотипа по 4 осям. Обработка результатов в реальном времени без задержек.</p>
+                <div style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">Vanilla JS • Logic Design • Optimization</div>
             </div>
             <div class="case-card">
-                <span class="case-tag">Design Concept</span>
-                <h3>Glassmorphism UI</h3>
-                <p>Исследование матовых интерфейсов и плавных анимаций для современных веб-приложений.</p>
-                <div style="margin-top: 20px; font-size: 0.8rem; opacity: 0.5;">Figma • CSS Variables</div>
+                <span class="case-tag">UI/UX Design</span>
+                <h3>Glassmorphism Hub</h3>
+                <p>Создание визуальной концепции «стеклянного» интерфейса. Глубокая работа с CSS фильтрами и адаптивной сеткой Grid.</p>
+                <div style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">Modern CSS • Glassmorphism • UX</div>
             </div>
             <div class="case-card">
-                <span class="case-tag">Interactive</span>
-                <h3>Portfolio Hub</h3>
-                <p>Единая экосистема для демонстрации проектов и взаимодействия с пользователем.</p>
-                <div style="margin-top: 20px; font-size: 0.8rem; opacity: 0.5;">Deployment • Vercel • Git</div>
+                <span class="case-tag">Infrastructure</span>
+                <h3>Automated Deployment</h3>
+                <p>Настройка CI/CD через GitHub и Vercel. Обеспечение стабильной работы веб-сервиса под нагрузкой.</p>
+                <div style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">Vercel • GitHub Actions • DevOps</div>
             </div>
         </div>
     </div>
@@ -114,82 +114,11 @@
     <div class="container">
         <div class="progress-bar"><div id="bar" class="progress-fill"></div></div>
         <div class="quiz-card">
-            <h2 id="q-text" style="min-height: 100px; font-size: 2rem;">...</h2>
+            <h2 id="q-text" style="min-height: 100px; font-size: 1.8rem;">...</h2>
             <div class="scale">
                 <span style="color: #10b981; font-weight: 800;">ДА</span>
                 <div class="dot" style="width: 65px; height: 65px; border-color: #10b981;" onclick="nx(3)"></div>
                 <div class="dot" style="width: 45px; height: 45px; border-color: #10b981;" onclick="nx(1)"></div>
-                <div class="dot" style="width: 25px; height: 25px;" onclick="nx(0)"></div>
-                <div class="dot" style="width: 45px; height: 45px; border-color: #f43f5e;" onclick="nx(-1)"></div>
-                <div class="dot" style="width: 65px; height: 65px; border-color: #f43f5e;" onclick="nx(-3)"></div>
-                <span style="color: #f43f5e; font-weight: 800;">НЕТ</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="result">
-    <div class="container">
-        <div class="quiz-card">
-            <div id="res-badge" style="background: var(--primary); color: black; padding: 5px 15px; border-radius: 8px; display: inline-block; font-weight: 800; font-size: 0.8rem; margin-bottom: 20px;">РЕЗУЛЬТАТ</div>
-            <h1 id="res-title" style="color: var(--primary);"></h1>
-            <p id="res-desc" style="font-size: 1.2rem; opacity: 0.7; max-width: 500px; margin: 0 auto 30px;"></p>
-            <button class="btn" onclick="location.href='https://t.me/NuIIReference'">СВЯЗАТЬСЯ С АВТОРОМ</button>
-        </div>
-    </div>
-</section>
-
-<script>
-    const qs = [
-        "Вам нравится знакомиться с новыми людьми.",
-        "Вы предпочитаете планировать дела заранее.",
-        "Вы всегда доводите начатые проекты до конца.",
-        "Вам важнее логика, чем чувства окружающих.",
-        "Вы часто погружаетесь в свои мысли.",
-        "Вы считаете, что дисциплина важнее таланта.",
-        "Вам легко понять эмоции других людей.",
-        "Вы любите порядок во всем, что вас окружает.",
-        "Вы часто импровизируете в сложных ситуациях.",
-        "Вам комфортно находиться в центре внимания."
-    ];
-
-    let c = 0, s = 0;
-
-    function show(id) {
-        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        if(id === 'test') { c = 0; s = 0; update(); }
-        window.scrollTo(0,0);
-    }
-
-    function update() {
-        document.getElementById('q-text').innerText = qs[c];
-        document.getElementById('bar').style.width = (c / qs.length) * 100 + '%';
-    }
-
-    function nx(v) {
-        s += v; c++;
-        if(c < qs.length) update();
-        else finish();
-    }
-
-    function finish() {
-        show('result');
-        const t = document.getElementById('res-title');
-        const d = document.getElementById('res-desc');
-        
-        if(s > 10) {
-            t.innerText = "Борец (ENFP)";
-            d.innerText = "Вы — креативная и общительная личность. Ваша энергия заразительна, а идеи способны менять мир вокруг.";
-        } else if (s > 0) {
-            t.innerText = "Стратег (INTJ)";
-            d.innerText = "Вы — глубокий мыслитель и аналитик. Вы видите структуру там, где другие видят хаос.";
-        } else {
-            t.innerText = "Хранитель (ISTJ)";
-            d.innerText = "Вы — надежный и ответственный человек. На вашей дисциплине и честности держится любой проект.";
-        }
-    }
-</script>
-
+                <div class="dot" style="width: 25px; height: 25px;" onclick="nx(0
 </body>
 </html>
