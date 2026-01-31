@@ -3,124 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@NuIIReference | Fix Edition</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <title>@NuIIReference | Tech Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #00f2fe; --bg: #030712; --card: rgba(255,255,255,0.03); }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: white; 
-            line-height: 1.6; overflow-x: hidden;
-        }
+        :root { --p: #00f2fe; --s: #818cf8; --bg: #030712; --c: rgba(255,255,255,0.05); }
+        * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.3s ease; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: #fff; overflow-x: hidden; }
 
-        /* Nav с фиксом кликов */
+        /* Navigation */
         nav { 
-            padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; 
-            background: rgba(3,7,18,0.98); position: fixed; top: 0; width: 100%; z-index: 99999; 
+            position: fixed; top: 0; width: 100%; padding: 25px 8%; 
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(3,7,18,0.8); backdrop-filter: blur(15px); z-index: 10000;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        .logo { font-weight: 800; cursor: pointer; pointer-events: auto; }
-        .nav-links span { margin-left: 15px; cursor: pointer; font-weight: 700; font-size: 0.8rem; pointer-events: auto; }
+        .logo { font-size: 1.5rem; font-weight: 800; cursor: pointer; letter-spacing: -1px; }
+        .logo span { color: var(--p); }
+        .links span { margin-left: 30px; font-weight: 600; font-size: 0.85rem; cursor: pointer; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; }
+        .links span:hover { opacity: 1; color: var(--p); }
 
-        /* Sections */
-        section { display: none; padding: 120px 5% 40px; min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-        section.active { display: flex !important; }
+        /* Container & Sections */
+        section { display: none; padding: 140px 8% 60px; min-height: 100vh; flex-direction: column; align-items: center; text-align: center; }
+        section.active { display: flex; animation: slideUp 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
 
-        /* Кнопки с гарантированным кликом */
+        h1 { font-size: clamp(3rem, 10vw, 6rem); font-weight: 800; line-height: 0.9; letter-spacing: -4px; margin-bottom: 30px; }
+        .grad { background: linear-gradient(to right, #fff, var(--p)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* Interactive Buttons */
         .btn { 
-            background: #fff; color: #000; padding: 18px 40px; border-radius: 50px; 
-            font-weight: 800; border: none; cursor: pointer !important; 
-            display: inline-block; margin: 10px; position: relative; z-index: 10;
-            pointer-events: auto !important;
+            position: relative; padding: 20px 45px; border-radius: 100px; border: none;
+            font-weight: 800; font-size: 1rem; cursor: pointer; z-index: 10;
+            background: #fff; color: #000; text-transform: uppercase;
         }
-        .btn:hover { background: var(--primary); transform: translateY(-2px); }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0,242,254,0.4); background: var(--p); }
+        .btn-s { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.2); margin-left: 15px; }
 
-        .card { background: var(--card); border: 1px solid rgba(255,255,255,0.1); padding: 30px; border-radius: 25px; max-width: 600px; width: 100%; text-align: left; }
+        /* Portfolio Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; width: 100%; max-width: 1200px; margin-top: 50px; }
+        .card { background: var(--c); border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 35px; text-align: left; }
+        .card:hover { border-color: var(--p); background: rgba(255,255,255,0.08); }
+        .t { font-size: 0.7rem; font-weight: 800; color: var(--p); letter-spacing: 2px; margin-bottom: 15px; display: block; }
+
+        /* Quiz UI */
+        .q-box { background: var(--c); border: 1px solid rgba(255,255,255,0.1); padding: 60px; border-radius: 40px; max-width: 700px; width: 100%; }
+        .dots { display: flex; justify-content: center; gap: 25px; margin-top: 40px; }
+        .dot { width: 70px; height: 70px; border: 3px solid #334155; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; cursor: pointer; }
+        .dot.yes { border-color: #10b981; color: #10b981; }
+        .dot.no { border-color: #f43f5e; color: #f43f5e; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="logo" onclick="go('home')">NuII<span>Reference</span></div>
-    <div class="nav-links">
-        <span onclick="go('home')">ГЛАВНАЯ</span>
-        <span onclick="go('resume')">РЕЗЮМЕ</span>
-        <span onclick="go('test')">ТЕСТ</span>
+    <div class="logo" onclick="app.nav('home')">NuII<span>Reference</span></div>
+    <div class="links">
+        <span onclick="app.nav('home')">Home</span>
+        <span onclick="app.nav('work')">Work</span>
+        <span onclick="app.nav('test')">Engine</span>
     </div>
 </nav>
 
 <section id="home" class="active">
-    <h1>@NuIIReference</h1>
-    <p style="margin: 20px 0; color: #94a3b8;">Frontend разработчик и архитектор логики.</p>
+    <h1 class="grad">Engineering<br>Digital Soul.</h1>
+    <p style="font-size: 1.4rem; color: #94a3b8; max-width: 600px; margin-bottom: 40px;">Я @NuIIReference. Создаю интерфейсы, которые чувствуются, и код, который работает безупречно.</p>
     <div>
-        <button class="btn" onclick="go('resume')">МОЁ РЕЗЮМЕ</button>
-        <button class="btn" style="background:none; color:white; border:1px solid #fff;" onclick="go('test')">ТЕСТ</button>
+        <button class="btn" onclick="app.nav('test')">Start Engine</button>
+        <button class="btn btn-s" onclick="app.nav('work')">View Cases</button>
     </div>
 </section>
 
-<section id="resume">
-    <div class="card">
-        <h2 style="color:var(--primary)">Резюме</h2>
-        <p style="margin: 15px 0;">Я специализируюсь на создании SPA-приложений и сложных интерактивных систем.</p>
-        <p><strong>Стек:</strong> JS, HTML5, CSS3, Vercel.</p>
-        <button class="btn" style="width:100%; margin-top:20px;" onclick="window.location.href='https://t.me/NuIIReference'">НАПИСАТЬ В ТГ</button>
+<section id="work">
+    <span class="t">Selected Works</span>
+    <h1>Selected Projects</h1>
+    <div class="grid">
+        <div class="card">
+            <span class="t">01. Interaction</span>
+            <h3>Psychology SPA</h3>
+            <p style="opacity: 0.6; margin-top: 15px;">Сложная система типирования на чистом JS. Мгновенная аналитика и адаптивный UI.</p>
+        </div>
+        <div class="card">
+            <span class="t">02. Design</span>
+            <h3>Liquid UI Kit</h3>
+            <p style="opacity: 0.6; margin-top: 15px;">Библиотека компонентов с фокусом на микро-взаимодействия и плавность.</p>
+        </div>
+        <div class="card">
+            <span class="t">03. Logic</span>
+            <h3>Bridge API</h3>
+            <p style="opacity: 0.6; margin-top: 15px;">Архитектура для бесшовной связи фронтенда с облачными сервисами.</p>
+        </div>
     </div>
 </section>
 
 <section id="test">
-    <div class="card" style="text-align:center;">
-        <h2 id="q-txt" style="min-height:80px; margin-bottom:30px;">...</h2>
-        <button class="btn" onclick="step(3)">ДА</button>
-        <button class="btn" style="background:#f43f5e; color:white;" onclick="step(-3)">НЕТ</button>
+    <div class="q-box">
+        <h2 id="q-text" style="font-size: 2rem; min-height: 120px;">Запуск...</h2>
+        <div class="dots">
+            <div class="dot yes" onclick="app.step(3)">ДА</div>
+            <div class="dot no" onclick="app.step(-3)">НЕТ</div>
+        </div>
     </div>
 </section>
 
 <section id="result">
-    <div class="card" style="text-align:center;">
-        <h1 id="res-t" style="color:var(--primary)"></h1>
-        <p id="res-d" style="margin:20px 0;"></p>
-        <button class="btn" onclick="go('home')">НАЗАД</button>
+    <div class="q-box">
+        <span class="t">Result</span>
+        <h1 id="res-title" style="font-size: 4rem; margin: 10px 0;"></h1>
+        <p id="res-desc" style="font-size: 1.2rem; color: #94a3b8; margin-bottom: 30px;"></p>
+        <button class="btn" onclick="window.location.href='https://t.me/NuIIReference'">Contact Author</button>
     </div>
 </section>
 
 <script>
-    const qs = ["Вам нравится кодить?", "Вы любите дизайн?", "Вы планируете задачи?", "Вам важна логика?", "Вы работаете быстро?"];
-    let cur = 0, pts = 0;
+    // Глобальный объект приложения для исключения конфликтов
+    const app = {
+        state: {
+            currentSection: 'home',
+            quizIndex: 0,
+            score: 0,
+            questions: [
+                "Вы доверяете интуиции больше, чем фактам?",
+                "Вам нравится контролировать процесс?",
+                "Вы быстро принимаете сложные решения?",
+                "Вам важна эстетика в каждой детали?",
+                "Вы стремитесь к идеальному коду?"
+            ]
+        },
 
-    // ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ (ГЛОБАЛЬНАЯ)
-    window.go = function(id) {
-        console.log("Переход в:", id);
-        const sections = document.querySelectorAll('section');
-        sections.forEach(s => s.classList.remove('active'));
-        
-        const target = document.getElementById(id);
-        if (target) {
-            target.classList.add('active');
+        nav(id) {
+            console.log('Switching to:', id);
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            const target = document.getElementById(id);
+            if (target) {
+                target.classList.add('active');
+                this.state.currentSection = id;
+            }
+            if (id === 'test') this.initQuiz();
+            window.scrollTo(0,0);
+        },
+
+        initQuiz() {
+            this.state.quizIndex = 0;
+            this.state.score = 0;
+            this.updateQuiz();
+        },
+
+        updateQuiz() {
+            document.getElementById('q-text').innerText = this.state.questions[this.state.quizIndex];
+        },
+
+        step(val) {
+            this.state.score += val;
+            this.state.quizIndex++;
+            if (this.state.quizIndex < this.state.questions.length) {
+                this.updateQuiz();
+            } else {
+                this.showResult();
+            }
+        },
+
+        showResult() {
+            this.nav('result');
+            const title = document.getElementById('res-title');
+            const desc = document.getElementById('res-desc');
+            
+            if (this.state.score > 5) {
+                title.innerText = "Architect";
+                desc.innerText = "Вы видите структуру в хаосе. Ваша сила — в системном мышлении. Кейс разработан @NuIIReference.";
+            } else {
+                title.innerText = "Visionary";
+                desc.innerText = "Вы создаете смыслы. Ваша интуиция ведет вас к нестандартным решениям. Дизайн от @NuIIReference.";
+            }
         }
-        
-        if(id === 'test') { cur = 0; pts = 0; up(); }
-        window.scrollTo(0,0);
-    }
+    };
 
-    function up() {
-        document.getElementById('q-txt').innerText = qs[cur];
-    }
-
-    window.step = function(v) {
-        pts += v; cur++;
-        if(cur < qs.length) up();
-        else {
-            go('result');
-            document.getElementById('res-t').innerText = pts > 0 ? "Профессионал" : "Новичок";
-            document.getElementById('res-d').innerText = "Создано @NuIIReference.";
-        }
-    }
-
-    // Инициализация принудительно
-    document.addEventListener('DOMContentLoaded', () => {
-        go('home');
-    });
+    // Принудительная инициализация
+    window.onload = () => app.nav('home');
 </script>
 </body>
 </html>
