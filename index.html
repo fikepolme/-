@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@NuIIReference | Industry Standard</title>
+    <title>@NuIIReference | Deep Archive</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root { 
             --p: #00f2fe; 
-            --bg: #02040a; 
+            --bg: #050505; 
             --border: rgba(255, 255, 255, 0.08);
         }
 
@@ -19,124 +19,41 @@
             color: #fff; 
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
-            background-image: radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.03) 0%, transparent 50%);
+            background-image: radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.04) 0%, transparent 70%);
         }
 
-        /* Тот самый "дорогой" шум */
+        /* Премиальное зерно (Noise) */
         body::after {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.40"/></svg>');
-            opacity: 0.2; pointer-events: none; z-index: 10000;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.08"/></svg>');
+            opacity: 0.12; pointer-events: none; z-index: 10000;
         }
 
         nav { 
-            position: fixed; top: 0; width: 100%; padding: 35px 8%; 
+            position: fixed; top: 0; width: 100%; padding: 40px 8%; 
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; mix-blend-mode: difference;
+            z-index: 1000;
         }
 
-        .logo { font-size: 1.8rem; font-weight: 800; letter-spacing: -2px; cursor: pointer; text-transform: uppercase; }
-        .links span { margin-left: 40px; font-size: 0.7rem; font-weight: 800; letter-spacing: 3px; cursor: pointer; opacity: 0.5; text-transform: uppercase; }
+        .logo { font-size: 1.6rem; font-weight: 800; letter-spacing: -2px; cursor: pointer; text-transform: uppercase; pointer-events: auto; }
+        .logo span { color: var(--p); }
+
+        .links span { margin-left: 40px; font-size: 0.7rem; font-weight: 800; letter-spacing: 3px; cursor: pointer; opacity: 0.4; text-transform: uppercase; pointer-events: auto; }
         .links span:hover { opacity: 1; color: var(--p); }
 
         section { display: none; min-height: 100vh; padding: 0 8%; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-        section.active { display: flex; animation: reveal 0.8s ease; }
+        section.active { display: flex; animation: reveal 0.7s ease; }
 
         h1 { 
-            font-size: clamp(4rem, 18vw, 12rem); font-weight: 800; line-height: 0.8; letter-spacing: -10px; margin-bottom: 40px; 
+            font-size: clamp(3.5rem, 16vw, 11rem); font-weight: 800; line-height: 0.8; letter-spacing: -8px; margin-bottom: 50px; 
             text-transform: uppercase;
         }
 
         .btn { 
-            padding: 28px 70px; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; 
-            letter-spacing: 4px; border: 1px solid #fff; background: transparent; color: #fff; 
-            cursor: pointer; position: relative; overflow: hidden;
+            padding: 25px 60px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; 
+            letter-spacing: 5px; border: 1px solid #fff; background: transparent; color: #fff; 
+            cursor: pointer; position: relative; z-index: 100; pointer-events: auto;
         }
-        .btn:hover { background: #fff; color: #000; transform: scale(1.02); }
-        .btn:active { transform: scale(0.98); }
+        .btn:hover { background: #fff; color: #000; transform: scale(1.03); }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; width: 100%; max-width: 1400px; margin-top: 80px; }
-        .card { border: 1px solid var(--border); padding: 60px; text-align: left; background: rgba(255,255,255,0.01); }
-        .card:hover { border-color: var(--p); background: #fff; }
-        .card:hover h3, .card:hover p { color: #000; }
-        .card h3 { font-size: 2.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 20px; text-transform: uppercase; }
-        .card p { opacity: 0.4; line-height: 1.4; }
-
-        .q-text { font-size: clamp(2rem, 6vw, 4rem); font-weight: 800; letter-spacing: -3px; margin-bottom: 60px; text-transform: uppercase; }
-
-        @keyframes reveal {
-            from { opacity: 0; transform: scale(1.1); filter: blur(20px); }
-            to { opacity: 1; transform: scale(1); filter: blur(0); }
-        }
-    </style>
-</head>
-<body>
-
-<nav>
-    <div class="logo" onclick="app.go('home')">@NuII<span>Reference</span></div>
-    <div class="links">
-        <span onclick="app.go('work')">WORK</span>
-        <span onclick="app.go('test')">LAB</span>
-    </div>
-</nav>
-
-<section id="home" class="active">
-    <h1>Logic<br>Over<br><span style="color: var(--p);">Design.</span></h1>
-    <button class="btn" onclick="app.go('work')">Initiate Experience</button>
-</section>
-
-<section id="work">
-    <h1>Archives</h1>
-    <div class="grid">
-        <div class="card" onclick="app.go('test')">
-            <h3>Core Engine</h3>
-            <p>Система принятия решений на базе Vanilla JavaScript. Отсутствие внешних зависимостей. Максимальная производительность.</p>
-        </div>
-        <div class="card">
-            <h3>Visual Code</h3>
-            <p>Бруталистический интерфейс с фокусом на типографику и пользовательский опыт в режиме High-Performance.</p>
-        </div>
-    </div>
-</section>
-
-<section id="test">
-    <div style="max-width: 1000px;">
-        <h2 id="q-txt" class="q-text">...</h2>
-        <button class="btn" onclick="app.step(1)">YES</button>
-        <button class="btn" style="border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.3);" onclick="app.step(0)">NO</button>
-    </div>
-</section>
-
-<section id="result">
-    <h1 id="res-t" style="color: var(--p);"></h1>
-    <p id="res-d" style="font-size: 1.2rem; opacity: 0.5; margin-bottom: 40px;"></p>
-    <button class="btn" onclick="app.go('home')">System Reset</button>
-</section>
-
-<script>
-    const app = {
-        idx: 0,
-        qs: ["Вы готовы к деструктивному дизайну?", "Логика важнее визуальных эффектов?", "Этот код станет вашим лучшим решением?"],
-        go(id) {
-            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            if(id === 'test') { this.idx = 0; this.up(); }
-            window.scrollTo(0,0);
-        },
-        up() { document.getElementById('q-txt').innerText = this.qs[this.idx]; },
-        step(v) {
-            this.idx++;
-            if(this.idx < this.qs.length) this.up();
-            else {
-                this.go('result');
-                document.getElementById('res-t').innerText = "Verified";
-                document.getElementById('res-d').innerText = "Профиль @NuIIReference подтвержден.";
-            }
-        }
-    };
-    window.onload = () => app.go('home');
-</script>
-</body>
-</html>
-</body>
-</html>
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(3
