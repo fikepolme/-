@@ -3,65 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NuIIReference | Resume & App</title>
+    <title>NuIIReference | Digital CV</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #00f2fe; --bg: #030712; }
-        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: white; line-height: 1.6; }
 
-        /* Навигация */
         nav { 
             padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; 
             background: rgba(3,7,18,0.95); position: fixed; top: 0; width: 100%; z-index: 10000; border-bottom: 1px solid #1e293b;
         }
-        .nav-links span { margin-left: 20px; cursor: pointer; font-weight: 700; color: #94a3b8; }
+        .nav-links span { margin-left: 20px; cursor: pointer; font-weight: 700; color: #94a3b8; font-size: 0.8rem; }
         .nav-links span:hover { color: var(--primary); }
 
-        /* Секции */
         section { display: none; padding: 100px 5% 50px; min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-        section.active { display: flex; }
+        .active { display: flex !important; }
 
-        /* Кнопки */
         .btn { 
             background: #fff; color: #000; padding: 18px 40px; border-radius: 50px; 
-            font-weight: 800; border: none; cursor: pointer; display: inline-block; margin: 10px;
-            -webkit-appearance: none; -moz-appearance: none; appearance: none;
+            font-weight: 800; border: none; cursor: pointer; display: inline-block; margin: 10px; text-decoration: none;
         }
-        .btn:active { background: var(--primary); transform: scale(0.98); }
+        .btn:hover { background: var(--primary); transform: translateY(-2px); }
 
-        /* Резюме */
-        .cv { background: #0f172a; padding: 30px; border-radius: 30px; border: 1px solid #1e293b; text-align: left; max-width: 600px; width: 100%; }
-        .skill { display: inline-block; background: #1e293b; color: var(--primary); padding: 5px 12px; border-radius: 5px; margin: 5px; font-size: 0.8rem; font-weight: 700; }
-
-        /* Точки теста */
-        .dot { width: 50px; height: 50px; border: 2px solid #334155; border-radius: 50%; cursor: pointer; display: inline-block; margin: 0 10px; }
+        .cv-box { background: #0f172a; padding: 40px; border-radius: 30px; border: 1px solid #1e293b; text-align: left; max-width: 700px; width: 100%; }
+        .skill-tag { display: inline-block; background: #1e293b; color: var(--primary); padding: 5px 12px; border-radius: 6px; margin: 5px; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(0,242,254,0.2); }
     </style>
 </head>
 <body>
 
 <nav>
-    <div style="font-weight: 800;" onclick="show('home')">NuII<span>Reference</span></div>
+    <div style="font-weight: 800; cursor: pointer;" onclick="go('home')">NuII<span>Reference</span></div>
     <div class="nav-links">
-        <span onclick="show('resume')">РЕЗЮМЕ</span>
-        <span onclick="show('test')">ТЕСТ</span>
+        <span onclick="go('resume')">РЕЗЮМЕ</span>
+        <span onclick="go('test')">ТЕСТ</span>
     </div>
 </nav>
 
 <section id="home" class="active">
-    <h1 style="font-size: 3rem; margin-bottom: 15px;">@NuIIReference</h1>
-    <p style="color: #94a3b8; margin-bottom: 30px;">Разработчик алгоритмов и интерфейсов.</p>
-    <button class="btn" onclick="show('test')">Пройти тест</button>
-    <button class="btn" style="background: none; border: 1px solid #fff; color: #fff;" onclick="show('resume')">Моё резюме</button>
+    <h1 style="font-size: clamp(2rem, 8vw, 4rem); letter-spacing: -2px;">Creative Engineering</h1>
+    <p style="color: #94a3b8; margin: 20px 0 30px; max-width: 500px;">Проектирую логику, упаковываю в дизайн. Автор @NuIIReference.</p>
+    <div>
+        <button class="btn" onclick="go('test')">ЗАПУСТИТЬ ТЕСТ</button>
+        <button class="btn" style="background:none; border: 1px solid white; color: white;" onclick="go('resume')">МОЁ РЕЗЮМЕ</button>
+    </div>
 </section>
 
 <section id="resume">
-    <div class="cv">
-        <h2 style="color: var(--primary); margin-bottom: 20px;">Моё Резюме</h2>
-        <p><strong>Кто я:</strong> Frontend-разработчик @NuIIReference.</p>
-        <p style="margin: 15px 0;"><strong>Навыки:</strong></p>
-        <div>
-            <span class="skill">JavaScript</span><span class="skill">HTML/CSS</span><span class="skill">UI/UX</span><span class="skill">Logic Design</span>
+    <div class="cv-box">
+        <h2 style="font-size: 2rem; margin-bottom: 10px;">@NuIIReference</h2>
+        <p style="color: var(--primary); font-weight: 700; margin-bottom: 25px;">Frontend Developer & Logic Architect</p>
+        
+        <p style="margin-bottom: 10px; font-weight: 700;">Ключевые навыки:</p>
+        <div style="margin-bottom: 25px;">
+            <span class="skill-tag">JavaScript ES6+</span>
+            <span class="skill-tag">UI/UX Animation</span>
+            <span class="skill-tag">SPA Architecture</span>
+            <span class="skill-tag">Git / CI-CD</span>
         </div>
-        <p style="margin-top: 20px; opacity: 0.7;">Этот проект — кейс, демонстрирующий навыки работы с архитектурой SPA приложений.</p>
-        <button class="btn" style="margin-top: 30px; width: 100%;" onclick="window.location.
+
+        <p style="margin-bottom: 10px; font-weight: 700;">Опыт / Кейсы:</p>
+        <p style="opacity: 0.7; font-size: 0.9rem; margin-bottom: 15px;">Разработка интерактивной платформы для психологического тестирования с мгновенной обработкой данных и динамическим интерфейсом.</p>
+        
+        <button class="btn" style="width: 100%; margin: 20px 0 0 0;" onclick="window.location.href='https://t.me/NuIIReference'">СВЯЗАТЬСЯ В ТЕЛЕГРАМ</button>
+    </div>
+</section>
+
+<section id="test">
+    <div class="cv-box" style="text-align: center;">
+        <h2 id="q-txt" style="min-height: 80px; margin-bottom: 40px; font-size: 1.8rem;">Загрузка...</h2>
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <button class="btn" style="width: 80px; height: 80px; border-radius: 50%;" onclick="step(3)">ДА</button>
+            <button class="btn" style="width: 80px; height: 80px; border-radius: 50%; background: #f43f5e; color: white;" onclick="step(-3)">НЕТ</button>
+        </div>
+    </div>
+</section>
+
+<section id="result">
+    <div class="cv-box" style="text-align: center;">
+        <h1 id="res-t" style="color: var(--primary); font-size: 3rem;"></h1>
+        <p id="res-d" style="margin: 20px 0 30px; opacity: 0.8;"></p>
+        <button class="btn" onclick="go('resume')">ПЕРЕЙТИ К РЕЗЮМЕ</button>
+    </div>
+</section>
+
+<script>
+    const questions = ["Вам нравится общаться?", "Вы планируете свои дела?", "Вы человек логики?", "Вы доводите дела до конца?", "Вам важен порядок?"];
+    let cur = 0, score = 0;
+
+    function go(id) {
+        // Жесткое переключение display для всех секций
+        const all = ['home', 'resume', 'test', 'result'];
+        all.forEach(s => {
+            document.getElementById(s).classList.remove('active');
+            document.getElementById(s).style.display = 'none';
+        });
+        
+        const target = document.getElementById(id);
+        target.classList.add('active');
+        target.style.display = 'flex';
+
+        if(id === 'test') { cur = 0; score = 0; render(); }
+        window.scrollTo(0,0);
+    }
+
+    function render() {
+        document.getElementById('q-txt').innerText = questions[cur];
+    }
+
+    function step(v) {
+        score += v; cur++;
+        if(cur < questions.length) render();
+        else {
+            go('result');
+            document.getElementById('res-t').innerText = score > 0 ? "Аналитик" : "Дипломат";
+            document.getElementById('res-d').innerText = "Твой тип личности определен системой @NuIIReference.";
+        }
+    }
+
+    // Принудительный запуск первой страницы
+    window.onload = function() { go('home'); };
+</script>
+
+</body>
+</html>
