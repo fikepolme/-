@@ -3,42 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@NuIIReference | Official Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <title>NuIIReference | Resume & Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #00f2fe; --purple: #818cf8; --bg: #030712; }
+        :root { --primary: #00f2fe; --bg: #030712; --card: rgba(255,255,255,0.03); --border: rgba(255,255,255,0.1); }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: white; line-height: 1.6; }
 
         nav { 
             padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; 
-            background: rgba(3,7,18,0.95); backdrop-filter: blur(10px); 
-            position: fixed; top: 0; width: 100%; z-index: 9999; border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(3,7,18,0.9); backdrop-filter: blur(15px); 
+            position: fixed; top: 0; width: 100%; z-index: 9999; border-bottom: 1px solid var(--border);
         }
-        .logo { font-weight: 800; font-size: 1.4rem; cursor: pointer; color: white; text-decoration: none; }
+        .logo { font-weight: 800; font-size: 1.4rem; cursor: pointer; color: white; }
         .logo span { color: var(--primary); }
-        .nav-links span { margin-left: 20px; cursor: pointer; font-weight: 600; font-size: 0.8rem; opacity: 0.7; transition: 0.3s; padding: 5px; }
+        .nav-links span { margin-left: 20px; cursor: pointer; font-weight: 600; font-size: 0.8rem; opacity: 0.6; transition: 0.3s; }
         .nav-links span:hover { opacity: 1; color: var(--primary); }
 
-        section { display: none; padding: 120px 5% 60px; min-height: 100vh; text-align: center; }
-        section.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        section { display: none; padding: 120px 5% 60px; min-height: 100vh; animation: fadeIn 0.4s ease; }
+        section.active { display: flex; flex-direction: column; align-items: center; }
 
         .btn { 
             background: #fff; color: #000; padding: 18px 40px; border-radius: 50px; 
             font-weight: 800; border: none; cursor: pointer; transition: 0.3s; 
-            display: inline-block; margin: 10px; text-decoration: none; position: relative; z-index: 100;
+            display: inline-block; margin: 10px; text-decoration: none;
         }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,242,254,0.3); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,242,254,0.3); }
 
-        .author-box { 
-            background: rgba(255,255,255,0.03); border: 1px solid var(--primary); 
-            padding: 50px; border-radius: 40px; max-width: 600px; width: 100%;
-            box-shadow: 0 0 40px rgba(0, 242, 254, 0.1);
-        }
-        .quiz-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 35px; width: 100%; max-width: 650px; }
-        .dot-container { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
-        .dot { border-radius: 50%; border: 2px solid #334155; cursor: pointer; transition: 0.3s; width: 50px; height: 50px; }
+        /* Resume Styling */
+        .cv-card { background: var(--card); border: 1px solid var(--border); padding: 50px 30px; border-radius: 40px; max-width: 800px; width: 100%; text-align: left; }
+        .tag { background: rgba(0,242,254,0.1); color: var(--primary); padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 800; margin-right: 8px; margin-bottom: 10px; display: inline-block; }
+        
+        .quiz-card { background: var(--card); border: 1px solid var(--border); padding: 40px; border-radius: 30px; max-width: 600px; width: 100%; text-align: center; }
+        .dot-container { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; }
+        .dot { border: 2px solid #334155; cursor: pointer; transition: 0.3s; border-radius: 50%; width: 50px; height: 50px; }
         .dot:hover { border-color: var(--primary); transform: scale(1.1); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -47,84 +48,59 @@
     <div class="logo" onclick="navTo('home')">NuII<span>Reference</span></div>
     <div class="nav-links">
         <span onclick="navTo('home')">ГЛАВНАЯ</span>
-        <span onclick="navTo('cases')">КЕЙСЫ</span>
+        <span onclick="navTo('resume')">РЕЗЮМЕ</span>
         <span onclick="navTo('test')">ТЕСТ</span>
-        <span onclick="navTo('account')" style="color: var(--primary); opacity: 1;">АВТОР</span>
     </div>
 </nav>
 
 <section id="home" class="active">
-    <h1 style="font-size: 3.5rem; letter-spacing: -2px;">Creative Space</h1>
-    <p style="color: #94a3b8; max-width: 500px; margin-bottom: 30px;">Твой проводник в мир Digital-психологии и интерфейсов. Разработано @NuIIReference.</p>
-    <button class="btn" onclick="navTo('test')">НАЧАТЬ ТЕСТ</button>
-</section>
-
-<section id="cases">
-    <h1>Наши Кейсы</h1>
-    <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 30px;">
-        <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; text-align: left; width: 300px;">
-            <h3 style="color: var(--primary)">Logic UI</h3>
-            <p>Этот сайт — живой пример того, как код превращается в опыт.</p>
-        </div>
-        <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; text-align: left; width: 300px;">
-            <h3 style="color: var(--primary)">Personal Branding</h3>
-            <p>Упаковка твоего профиля и кейсов в единую экосистему.</p>
-        </div>
+    <h1 style="font-size: 4rem; letter-spacing: -3px; margin-bottom: 20px;">@NuIIReference</h1>
+    <p style="color: #94a3b8; max-width: 550px; margin-bottom: 40px; font-size: 1.2rem;">Frontend-разработчик и создатель интерактивных систем. Изучаю пересечение кода и человеческой психологии.</p>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+        <button class="btn" onclick="navTo('test')">ПРОЙТИ ТЕСТ</button>
+        <button class="btn" style="background:transparent; color:white; border:1px solid white;" onclick="navTo('resume')">МОЁ РЕЗЮМЕ</button>
     </div>
 </section>
 
-<section id="account">
-    <div class="author-box">
-        <div style="width: 80px; height: 80px; background: linear-gradient(45deg, var(--primary), var(--purple)); border-radius: 20px; margin: 0 auto 20px;"></div>
-        <h2 style="font-size: 2rem; margin-bottom: 10px;">@NuIIReference</h2>
-        <p style="opacity: 0.7; margin-bottom: 30px;">Full-stack Developer | UI/UX Designer | Algorithm Architect</p>
-        <button class="btn" onclick="window.location.href='https://t.me/NuIIReference'">СВЯЗАТЬСЯ В TELEGRAM</button>
+<section id="resume">
+    <div class="cv-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 30px;">
+            <div>
+                <h1 style="font-size: 2.5rem; letter-spacing: -1px; margin-bottom: 5px;">@NuIIReference</h1>
+                <p style="color: var(--primary); font-weight: 700;">Creative Full-stack Developer</p>
+            </div>
+            <button class="btn" style="padding: 12px 25px; font-size: 0.8rem;" onclick="window.location.href='https://t.me/NuIIReference'">CONTACT ME</button>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <h3 style="margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 5px;">Hard Skills</h3>
+            <span class="tag">JavaScript (ES6+)</span>
+            <span class="tag">HTML5 & CSS3 Grid/Flex</span>
+            <span class="tag">UI/UX Design</span>
+            <span class="tag">Git / GitHub</span>
+            <span class="tag">Vercel Deployment</span>
+            <span class="tag">Logic Architecture</span>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <h3 style="margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 5px;">Проекты (Кейсы)</h3>
+            <div style="margin-bottom: 20px;">
+                <h4 style="color: var(--primary)">Personality Type Hub</h4>
+                <p style="font-size: 0.9rem; opacity: 0.7;">Разработка системы психологического анализа на базе чистого JS. Реализация SPA-архитектуры без использования тяжелых фреймворков.</p>
+            </div>
+            <div>
+                <h4 style="color: var(--primary)">Digital Portfolio Concept</h4>
+                <p style="font-size: 0.9rem; opacity: 0.7;">Создание адаптивного интерфейса с использованием Glassmorphism-дизайна и плавной навигации.</p>
+            </div>
+        </div>
     </div>
 </section>
 
 <section id="test">
     <div class="quiz-card">
-        <h2 id="q-txt">Загрузка...</h2>
+        <h2 id="q-txt">...</h2>
         <div class="dot-container">
             <div class="dot" style="border-color: #10b981;" onclick="doStep(3)"></div>
             <div class="dot" style="width:35px; height:35px;" onclick="doStep(1)"></div>
             <div class="dot" style="width:25px; height:25px;" onclick="doStep(0)"></div>
-            <div class="dot" style="width:35px; height:35px;" onclick="doStep(-1)"></div>
-            <div class="dot" style="border-color: #f43f5e;" onclick="doStep(-3)"></div>
-        </div>
-    </div>
-</section>
-
-<section id="result">
-    <div class="quiz-card">
-        <h1 id="res-n" style="color: var(--primary);"></h1>
-        <p id="res-i" style="margin: 20px 0 30px; opacity: 0.8;"></p>
-        <button class="btn" onclick="navTo('account')">ПОДРОБНЕЕ ОБ АВТОРЕ</button>
-    </div>
-</section>
-
-<script>
-    const qs = ["Вы любите шумные компании?", "Вы планируете свой день?", "Вам важна логика?", "Вы часто мечтаете?", "Вы доводите дела до конца?"];
-    let curr = 0, score = 0;
-
-    window.navTo = function(id) {
-        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        if(id === 'test') { curr = 0; score = 0; upQ(); }
-        window.scrollTo(0,0);
-    }
-
-    function upQ() { document.getElementById('q-txt').innerText = qs[curr]; }
-
-    window.doStep = function(v) {
-        score += v; curr++;
-        if(curr < qs.length) upQ();
-        else {
-            navTo('result');
-            document.getElementById('res-n').innerText = score > 0 ? "Аналитик" : "Дипломат";
-            document.getElementById('res-i').innerText = "Твой результат рассчитан по алгоритму @NuIIReference.";
-        }
-    }
-</script>
-</body>
-</html>
+            <div class="dot" style="width:35px; height:3
